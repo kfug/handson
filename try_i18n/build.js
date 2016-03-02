@@ -17,8 +17,15 @@ var _templates
 rmrf(BUILD)
 
 // ソースファイルをプロゼスしてターゲットフォルダーに書き出す
-processFiles(SOURCE, TARGET, {
-  title: 'Cool Homepage'
+processFiles(SOURCE, path.join(TARGET, 'ja'), {
+  title: 'クール ホームページ',
+  lang: 'ja',
+  otherLang: 'en'
+})
+processFiles(SOURCE, path.join(TARGET, 'en'), {
+  title: 'Cool Homepage',
+  lang: 'en',
+  otherLang: 'ja'
 })
 
 function processFiles (source, target, variables) {
