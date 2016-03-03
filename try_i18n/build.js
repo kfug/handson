@@ -22,6 +22,10 @@ processFiles(SOURCE, path.join(TARGET, 'ja'), {
   lang: 'ja',
   otherLang: 'en',
   otherLangName: 'English',
+  link: {
+    home: 'ホーム',
+    product: '商品'
+  },
   index: {
     title: 'Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこそ!',
     content: '今日は国際化を学びましょう。プロダクトやエンタテインメントを世界中でシェアできるように。私たちのスキルは関西のために大切です。'
@@ -36,6 +40,10 @@ processFiles(SOURCE, path.join(TARGET, 'en'), {
   lang: 'en',
   otherLang: 'ja',
   otherLangName: '日本語',
+  link: {
+    home: 'Home',
+    product: 'Product'
+  },
   index: {
     title: 'Welcome to the Frontend Conference 2016!',
     content: 'Today we will study internationalization to bring commerce and entertainment from and to Osaka. Our skill is important for making Kansai better.'
