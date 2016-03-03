@@ -20,12 +20,14 @@ rmrf(BUILD)
 processFiles(SOURCE, path.join(TARGET, 'ja'), {
   title: 'クール ホームページ',
   lang: 'ja',
-  otherLang: 'en'
+  otherLang: 'en',
+  otherLangName: 'English'
 })
 processFiles(SOURCE, path.join(TARGET, 'en'), {
   title: 'Cool Homepage',
   lang: 'en',
-  otherLang: 'ja'
+  otherLang: 'ja',
+  otherLangName: '日本語'
 })
 
 function processFiles (source, target, variables) {
