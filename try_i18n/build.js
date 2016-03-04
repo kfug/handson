@@ -53,6 +53,7 @@ processFiles(SOURCE, path.join(TARGET, 'en'), {
     content: 'Because you will need to sell something. It isn\'t gonna pay for itself.'
   }
 })
+processFiles(path.join(ROOT, 'global'), TARGET, {})
 
 function processFiles (source, target, variables) {
   _templates = {}
