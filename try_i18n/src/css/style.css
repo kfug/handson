@@ -1,4 +1,6 @@
 html {
+	font-size: 14px;
+	line-height: 1.5em;
 	display: block;
 	width: 100%;
 	background: #359cdc;
@@ -25,4 +27,7 @@ a:before {
 }
 a:hover {
 	color: #000;
+}
+html[lang="ja"] {
+	writing-mode: vertical-rl;
 }
