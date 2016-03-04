@@ -1,0 +1,12 @@
+html {
+	padding: 2em;
+}
+body {
+	max-width: 960px;
+	display: block;
+	text-align: left;
+	margin: 0 auto;
+}
+.table-of-contents {
+	background: #DEDEDE;
+}

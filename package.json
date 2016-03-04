@@ -1,0 +1,38 @@
+{
+  "name": "handson",
+  "version": "1.0.0",
+  "description": "ここはHandson用のリポシトリです。",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp --gulpfile _build/gulpfile.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kfug/handson.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kfug/handson/issues"
+  },
+  "homepage": "https://github.com/kfug/handson#readme",
+  "dependencies": {
+    "autoprefixer": "^6.3.3",
+    "browserify": "^13.0.0",
+    "glob": "^7.0.0",
+    "gulp": "^3.9.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-markdown-it": "^0.1.1",
+    "gulp-postcss": "^6.1.0",
+    "gulp-rename": "^1.2.2",
+    "highlight.js": "^9.2.0",
+    "jade": "^1.11.0",
+    "markdown-it-anchor": "^2.4.0",
+    "markdown-it-named-headers": "0.0.4",
+    "markdown-it-table-of-contents": "^0.2.0",
+    "postcss-import": "^8.0.2",
+    "rimraf": "^2.5.2",
+    "through2": "^2.0.1"
+  }
+}
