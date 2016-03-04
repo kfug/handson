@@ -1,0 +1,14 @@
+{
+  "name": "try_i18n",
+  "version": "1.0.0",
+  "description": "日本語を読めない方または日本に住んでいない方と対応ができたとしたら、ウェブサイトで 売り上げを上げたり、リーチを広げることができます。",
+  "main": "build.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
