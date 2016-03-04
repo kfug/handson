@@ -9,6 +9,7 @@ var BUILD = path.join(ROOT, 'build')
 var TARGET = path.join(ROOT, 'build')
 var TEMPLATE = path.join(ROOT, 'template')
 var TEMPLATE_PATTERN = /\{\{([^}]+)\}\}/ig
+var ALL_VARIABLES = readLangCSV('lang.csv', ['en', 'ja'])
 
 // テンプレートを Cacheする変数
 var _templates
@@ -17,42 +18,8 @@ var _templates
 rmrf(BUILD)
 
 // ソースファイルをプロゼスしてターゲットフォルダーに書き出す
-processFiles(SOURCE, path.join(TARGET, 'ja'), {
-  title: 'クール ホームページ',
-  lang: 'ja',
-  otherLang: 'en',
-  otherLangName: 'English',
-  link: {
-    home: 'ホーム',
-    product: '商品'
-  },
-  index: {
-    title: 'Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこそ!',
-    content: '今日は国際化を学びましょう。プロダクトやエンタテインメントを世界中でシェアできるように。私たちのスキルは関西のために大切です。'
-  },
-  product: {
-    title: '会議用プロダクト!',
-    content: '何かを売らないといけません。この仕事でお金が入った方がいいですよね？'
-  }
-})
-processFiles(SOURCE, path.join(TARGET, 'en'), {
-  title: 'Cool Homepage',
-  lang: 'en',
-  otherLang: 'ja',
-  otherLangName: '日本語',
-  link: {
-    home: 'Home',
-    product: 'Product'
-  },
-  index: {
-    title: 'Welcome to the Frontend Conference 2016!',
-    content: 'Today we will study internationalization to bring commerce and entertainment from and to Osaka. Our skill is important for making Kansai better.'
-  },
-  product: {
-    title: 'Product for the conference!',
-    content: 'Because you will need to sell something. It isn\'t gonna pay for itself.'
-  }
-})
+processFiles(SOURCE, path.join(TARGET, 'ja'), ALL_VARIABLES.ja)
+processFiles(SOURCE, path.join(TARGET, 'en'), ALL_VARIABLES.en)
 processFiles(path.join(ROOT, 'global'), TARGET, {})
 
 function processFiles (source, target, variables) {

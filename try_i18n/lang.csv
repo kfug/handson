@@ -1,0 +1,11 @@
+id,en,ja
+title,"Cool Homepage","クール ホームページ"
+lang,en,ja
+otherLang,ja,en
+otherLangName,日本語,English
+index.title,"Welcome to the Frontend Conference 2016!","Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこそ!"
+index.content,"Today we will study internationalization to bring commerce and entertainment from and to Osaka. Our skill is important for making Kansai better.","今日は国際化を学びましょう。プロダクトやエンタテインメントを世界中でシェアできるように。私たちのスキルは関西のために大切です。"
+product.title,"Product for the conference!","会議用プロダクト!"
+product.content,"Because you will need to buy something, else it isn't gonna pay for itself.","何かを売らないといけません。この仕事でお金が入った方がいいですよね？"
+link.home,"Home","ホーム"
+link.product,"Product","商品"
