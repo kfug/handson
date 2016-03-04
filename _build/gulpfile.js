@@ -10,17 +10,29 @@ var postcss = require('gulp-postcss')
 var autoprefixer = require('autoprefixer')
 var postcssImport = require('postcss-import')
 var path = require('path')
+var slugify = {
+  slugify: function (text) {
+    return text.toLowerCase().replace(/\s|\&|\$|\\\"\'/g, '-')
+  }
+}
 var indexTemplate
 
 
 gulp.task('clean', ()=> {
-  rimraf.sync('dist/**/*.{html,js,css,png,gif}')
+  rimraf.sync('dist/**/*.{html,js,css,png,gif,key,pdf}')
 })
 
-gulp.task('js', ()=> {
-  return gulp.src('src/*.js')
+gulp.task('copy_src', ()=> {
+  return gulp.src('src/**/*.{js,key,pdf}')
     .pipe(gulp.dest('dist'))
 })
+
+gulp.task('copy_handson', ()=> {
+  return gulp.src('../try_*/**/*.{js,key,pdf}')
+    .pipe(gulp.dest('dist'))
+})
+
+gulp.task('copy', ['copy_src', 'copy_handson'])
 
 gulp.task('load_template', (cb)=> {
   fs.readFile('src/index.jade', 'utf8', function (err, data) {
@@ -48,9 +60,9 @@ gulp.task('html', ['load_template'], ()=> {
   return gulp.src('../try_*/README.md')
     .pipe(markdown({
       plugins: [
-        'markdown-it-anchor',
+        ['markdown-it-anchor', slugify],
         'markdown-it-named-headers',
-        'markdown-it-table-of-contents'
+        ['markdown-it-table-of-contents', slugify]
       ],
       options: {
         highlight: (str, lang)=> {
@@ -77,4 +89,4 @@ gulp.task('html', ['load_template'], ()=> {
     .pipe(gulp.dest('dist'))
 })
 
-gulp.task('default', ['clean', 'js', 'css', 'html'])
+gulp.task('default', ['clean', 'copy', 'css', 'html'])
