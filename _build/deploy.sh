@@ -24,10 +24,9 @@ else
   git clone -b gh-pages https://$GITHUB_USER:$GITHUB_PERSONAL_ACCESS_TOKEN@github.com/kfug/handson.git $BUILD_FOLDER
 fi
 
-npm run build
-
 cd $BUILD_FOLDER
 git checkout gh-pages
+npm run build
 git add . --all --force
 git commit -m "Automatic deployment of $(git rev-parse HEAD)"
 git push origin gh-pages
