@@ -1,10 +1,44 @@
 <html>
   <head>
-  	<meta charset="utf8">
-  	<link rel="stylesheet" href="en/css/style.css">
+    <meta charset="utf8">
+    <link rel="stylesheet" href="en/css/style.css">
   </head>
   <body>
     <a href="en/index.html">English</a>
     <a href="ja/index.html">日本語</a>
   </body>
+  <script type="text/javascript">
+    autoDetect()
+
+    function autoDetect () {
+      if (!localStorage) {
+        return // 保存できない場合はリダイレクトしない
+      }
+
+      if (localStorage.getItem('firstRedirect')) {
+        return // 以前リダイレクトしたから今回はリダイレクトしない
+      }
+
+      // 今回のリダイレクトを保存する
+      localStorage.setItem('firstRedirect', true)
+
+      // ブラウザーの言語
+      var lang = getBrowserLanguage()
+
+      // 言語を
+      lang = lang.toLowerCase()
+      lang = (lang === 'ja' || lang == 'ja_jp') ? 'ja' : 'en'
+
+      document.location.assign(lang + '/index.html')
+    }
+
+    // クロスブラウザーの言語調べるスクリプト
+    function getBrowserLanguage () {
+      var nav = navigator
+      return (nav.languages && nav.languages[0])
+        || nav.userLanguage
+        || nav.language
+        || 'en-US' 
+    }
+  </script>
 </html>
