@@ -1,5 +1,5 @@
-<!DOCTYPE html><html><head><meta charset="utf8"><title></title><link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css"><script src="../highlight.pack.js"></script></head><body><div class="markdown-body"><p><div class="table-of-contents"><ul><li><a href="#jade-html">Jade で始める新しい HTML の書き方</a><ul><li><a href="#html">HTML がこんな風に書けます！</a></li><li><a href="#">やってみよう</a></li><li><a href="#">基本的な機能</a></li><li><a href="#">強力な機能</a></li><li><a href="#gulp">gulp を使ってコンパイル</a></li><li><a href="#jade">Jade を使って簡単な静的サイトなブログが作れる</a></li><li><a href="#">その他テンプレートエンジン</a></li></ul></li></ul></div></p>
-<h1 id="jade-html" id="jade-html">Jade で始める新しい HTML の書き方</h1>
+<!DOCTYPE html><html><head><meta charset="utf8"><title></title><link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css"><script src="../highlight.pack.js"></script></head><body><div class="markdown-body"><p><div class="table-of-contents"><ul><li><a href="#jade-で始める新しい-html-の書き方">Jade で始める新しい HTML の書き方</a><ul><li><a href="#html-がこんな風に書けます！">HTML がこんな風に書けます！</a></li><li><a href="#やってみよう">やってみよう</a></li><li><a href="#基本的な機能">基本的な機能</a></li><li><a href="#強力な機能">強力な機能</a></li><li><a href="#gulp-を使ってコンパイル">gulp を使ってコンパイル</a></li><li><a href="#jade-を使って簡単な静的サイトなブログが作れる">Jade を使って簡単な静的サイトなブログが作れる</a></li><li><a href="#その他テンプレートエンジン">その他テンプレートエンジン</a></li></ul></li></ul></div></p>
+<h1 id="jade-で始める新しい-html-の書き方" id="jade-html">Jade で始める新しい HTML の書き方</h1>
 <ul>
 <li>Jade は Node.js 製のテンプレートエンジンです。</li>
 <li><a href="http://haml.info/">Haml</a> などに見られるような、インデントで要素の階層を表す構文で初めての人にはとっつきにくい面もアリますが、多様な機能など、静的サイト制作を強力に支援する機能があります。</li>
@@ -7,7 +7,7 @@
 </ul>
 <p>Jade - Template Engine<br>
 <a href="http://jade-lang.com/">http://jade-lang.com/</a></p>
-<h2 id="html" id="html">HTML がこんな風に書けます！</h2>
+<h2 id="html-がこんな風に書けます！" id="html">HTML がこんな風に書けます！</h2>
 <p>Jade でマークアップ！</p>
 <pre><code class="language-jade">doctype html
 html(lang='en')
@@ -62,20 +62,24 @@ html(lang='en')
 <p>Node.js の環境がない方はオンライン上でコードを書けるサービス <a href="http://codepen.io/">CodePen</a> で試していただくことができます。<br>
 ※ただし一部の機能については使用していただくことができません。</p>
 <hr>
-<h2 id="" id="">やってみよう</h2>
-<h5 id="git-clone" id="git-clone">サンプルファイルを <a href="https://github.com/kfug/handson/archive/try_jade.zip">ダウンロード</a> するか、git 経由で clone します。</h5>
+<h2 id="やってみよう" id="">やってみよう</h2>
+<h5 id="サンプルファイルを-ダウンロード-するか、git-経由で-clone-します。" id="git-clone">サンプルファイルを <a href="https://github.com/kfug/handson/archive/try_jade.zip">ダウンロード</a> するか、git 経由で clone します。</h5>
 <pre><code class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/kfug/handson -b try_jade
 </code></pre>
 <p><a href="https://github.com/kfug/handson/archive/try_jade.zip">zip ファイルをダウンロード</a></p>
-<h5 id="-2" id="">作業ディレクトリに移動</h5>
-<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> [git <span class="hljs-built_in">clone</span> したディレクトリ、もしくは zip ファイルを展開したディレクトリ]/handson/try_jade
+<h5 id="作業ディレクトリに移動" id="">作業ディレクトリに移動</h5>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> handson/
+
+// or
+
+$ <span class="hljs-built_in">cd</span> [zip ファイルを展開したディレクトリ]/handson-try_jade/
 </code></pre>
-<h5 id="-3" id="">パッケージのインストール</h5>
+<h5 id="パッケージのインストール" id="">パッケージのインストール</h5>
 <pre><code class="language-bash">$ npm install
 </code></pre>
-<h5 id="indexjade" id="indexjade">テキストエディターで、index.jade を編集</h5>
+<h5 id="テキストエディターで、index.jade-を編集" id="indexjade">テキストエディターで、index.jade を編集</h5>
 <p>編集するファイルはこちらにあります。</p>
-<p>handson/try_jade/jade/index.jade</p>
+<p><code>handson/jade/index.jade</code></p>
 <p>ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。</p>
 <pre><code class="language-jade">//- index.jade
 doctype html
@@ -86,22 +90,22 @@ html(lang='en')
     h1 Hello Jade !!
 </code></pre>
 <p>貼り付けできましたら保存してください。</p>
-<h5 id="jade-html-2" id="jade-html">Jade ファイルを HTML ファイルにコンパイル</h5>
+<h5 id="jade-ファイルを-html-ファイルにコンパイル" id="jade-html">Jade ファイルを HTML ファイルにコンパイル</h5>
 <p>以下コマンドを実行</p>
 <pre><code class="language-bash">$ gulp jade
 </code></pre>
 <p>もしくは、</p>
 <pre><code class="language-bash">$ npm run jade
 </code></pre>
-<p><code>./public/</code> ディレクトリに HTML ファイルが作成されていますか？？</p>
+<p><code>handson/public/</code> ディレクトリに HTML ファイルが作成されていますか？？</p>
 <hr>
 <p>もしつまずいたら Jade のコードをオンラインで変換できる、Jade Converter が便利です。</p>
 <p><a href="http://html2jade.org/">http://html2jade.org/</a></p>
 <p><a href="http://html2jade.vida.io/">http://html2jade.vida.io/</a></p>
 <p><a href="http://html2jade.herokuapp.com/">http://html2jade.herokuapp.com/</a></p>
 <hr>
-<h2 id="-4" id="">基本的な機能</h2>
-<h3 id="-5" id="">書き方</h3>
+<h2 id="基本的な機能" id="">基本的な機能</h2>
+<h3 id="書き方" id="">書き方</h3>
 <p>※以下サンプルコード内の半角スペースは必ず必要です。</p>
 <pre><code class="language-jade">//- index.jade
 doctype html
@@ -145,7 +149,7 @@ html
       li: a(href=&quot;http://kfug.jp/frontconf2016/&quot;) link
 </code></pre>
 <p><a href="http://codepen.io/shimakyohsuke/pen/WwQraX">CodePen で見る</a></p>
-<h3 id="-6" id="">変数</h3>
+<h3 id="変数" id="">変数</h3>
 <pre><code class="language-jade">//- index.jade
 doctype html
 html
@@ -161,9 +165,9 @@ html
     p Todays event is #{theGreat} !
 </code></pre>
 <p><a href="http://codepen.io/shimakyohsuke/pen/oxjbJN">CodePen で見る</a></p>
-<h3 id="iteration" id="iteration">Iteration（繰り返し処理）</h3>
+<h3 id="iteration（繰り返し処理）" id="iteration">Iteration（繰り返し処理）</h3>
 <p><a href="http://jade-lang.com/reference/iteration/">http://jade-lang.com/reference/iteration/</a></p>
-<pre><code>//- index.jade
+<pre><code class="language-jade">//- index.jade
 doctype html
 html
   head
@@ -183,8 +187,8 @@ html
         li= index + ': ' + val
 </code></pre>
 <p><a href="http://codepen.io/shimakyohsuke/pen/yOYeZq">CodePen で見る</a></p>
-<h4 id="-7" id="">個人的によく使うやつ</h4>
-<pre><code>select(name=&quot;birthday_year&quot;, required)
+<h4 id="個人的によく使うやつ" id="">個人的によく使うやつ</h4>
+<pre><code class="language-jade">select(name=&quot;birthday_year&quot;, required)
   option(value='', selected='selected') -
     - var n = 1990
     while n &lt;= 2016
@@ -212,7 +216,7 @@ select(name=&quot;birthday_day&quot;, required)
 <h3 id="filters" id="filters">Filters</h3>
 <p><a href="http://jade-lang.com/reference/filters/">http://jade-lang.com/reference/filters/</a></p>
 <p>※Markdown や CoffeeScript を Jade ファイル内に記述し HTML に変換する場合は、別途必要なパッケージがございます。</p>
-<pre><code>doctype html
+<pre><code class="language-jade">doctype html
 html
   head
     title Try Jade ハンズオン
@@ -230,11 +234,16 @@ html
 </code></pre>
 <p>※CodePen ではみれません。</p>
 <hr>
-<h2 id="-8" id="">強力な機能</h2>
-<h3 id="includes" id="includes">Includes（外部ファイルの取り込み）</h3>
+<h2 id="強力な機能" id="">強力な機能</h2>
+<h3 id="includes（外部ファイルの取り込み）" id="includes">Includes（外部ファイルの取り込み）</h3>
 <p><a href="http://jade-lang.com/reference/includes/">http://jade-lang.com/reference/includes/</a></p>
-<p><strong>jade/ ディレクトリ内に sample2/ ディレクトリを作成します。</strong></p>
-<pre><code>//- jade/sample1/index.jade
+<p>サンプルファイルを <code>sample1/</code> にご用意しております。</p>
+<pre><code>handson/sample1/index.jade
+handson/sample1/_header.jade
+handson/sample1/_footer.html
+</code></pre>
+<p><strong>jade/ ディレクトリ内に sample1/ ディレクトリを作成し以下を作成します。</strong></p>
+<pre><code class="language-jade">//- jade/sample1/index.jade
 doctype html
 html
   //- ここで head.jade を呼び出し
@@ -245,39 +254,50 @@ html
     //- ここで _footer.html を呼び出し
     include ./_footer.html
 </code></pre>
-<pre><code>//- jade/sample1/_head.jade
+<pre><code class="language-jade">//- jade/sample1/_head.jade
 head
   title Try Jade ハンズオン
   script(src='/javascripts/jquery.js')
   script(src='/javascripts/app.js')
 </code></pre>
-<pre><code>&lt;!-- jade/sample1/_footer.html --&gt;
-&lt;div id=&quot;footer&quot;&gt;
-  &lt;p&gt;Copyright (c) KFUG&lt;/p&gt;
-&lt;/div&gt;
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- jade/sample1/_footer.html --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"footer"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Copyright (c) KFUG<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </code></pre>
+<p>3ファイル書けたら、以下コマンドを実行</p>
+<pre><code class="language-bash">$ gulp jade
+</code></pre>
+<p>もしくは、</p>
+<pre><code class="language-bash">$ npm run jade
+</code></pre>
+<p><code>handson/public/sample1/index.html</code> が作成されていますか？？</p>
 <p>コンパイル後の HTML</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Try Jade ハンズオン&lt;/title&gt;
-    &lt;script src='/javascripts/jquery.js'&gt;&lt;/script&gt;
-    &lt;script src='/javascripts/app.js'&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Try Jade ハンズオン&lt;/h1&gt;
-    &lt;p&gt;Hello! Jade&lt;/p&gt;
-    &lt;div id=&quot;footer&quot;&gt;
-      &lt;p&gt;Copyright (c) KFUG&lt;/p&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Try Jade ハンズオン<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">'/javascripts/jquery.js'</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">'/javascripts/app.js'</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Try Jade ハンズオン<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Hello! Jade<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"footer"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Copyright (c) KFUG<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
 <p>※CodePen ではみれません。</p>
-<h3 id="extends" id="extends">Extends（テンプレートの継承）</h3>
+<h3 id="extends（テンプレートの継承）" id="extends">Extends（テンプレートの継承）</h3>
 <p><a href="http://jade-lang.com/reference/extends/">http://jade-lang.com/reference/extends/</a></p>
-<p><strong>jade/ ディレクトリ内に sample2/ ディレクトリを作成します。</strong></p>
-<pre><code>//- jade/sample2/_layout.jade
+<p>サンプルファイルを <code>sample2/</code> にご用意しております。</p>
+<pre><code>handson/sample2/index.jade
+handson/sample2/_layout.jade
+</code></pre>
+<p><strong>jade/ ディレクトリ内に sample2/ ディレクトリを作成し以下を作成します。</strong></p>
+<pre><code class="language-jade">//- jade/sample2/_layout.jade
 doctype html
 html
   head
@@ -289,7 +309,7 @@ html
     //- block と書いておくと要素を挿入できる
     block content
 </code></pre>
-<pre><code>//- jade/sample2/index.jade
+<pre><code class="language-jade">//- jade/sample2/index.jade
 extends ./_layout.jade
 
 //- _layout.jade の title を上書きしてます。
@@ -300,22 +320,29 @@ block title
 block content
   h1 My Article
 </code></pre>
+<p>3ファイル書けたら、以下コマンドを実行</p>
+<pre><code class="language-bash">$ gulp jade
+</code></pre>
+<p>もしくは、</p>
+<pre><code class="language-bash">$ npm run jade
+</code></pre>
+<p><code>handson/public/sample2/index.html</code> が作成されていますか？？</p>
 <p>コンパイル後の HTML</p>
-<pre><code>&lt;!doctype html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;!-- 上書きされたタイトルが出力される。 --&gt;
-    &lt;title&gt;Article Title&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;My Article&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-html"><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 上書きされたタイトルが出力される。 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Article Title<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Article<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
 </code></pre>
 <p>※CodePen ではみれません。</p>
 <h3 id="mixins" id="mixins">Mixins</h3>
 <p><a href="http://jade-lang.com/reference/mixins/">http://jade-lang.com/reference/mixins/</a></p>
-<pre><code>mixin pet(name)
+<pre><code class="language-jade">mixin pet(name)
   li.pet= name
 
 ul
@@ -324,9 +351,9 @@ ul
   +pet('pig')
 </code></pre>
 <p><a href="http://codepen.io/shimakyohsuke/pen/LNpGaY">CodePen で見る</a></p>
-<h4 id="-9" id="">個人的によく使うやつ</h4>
+<h4 id="個人的によく使うやつ-2" id="">個人的によく使うやつ</h4>
 <p>グローバルナビなどに。</p>
-<pre><code>mixin gnav(id, ...items)
+<pre><code class="language-jade">mixin gnav(id, ...items)
   ul(class=id)
     each item in items
       li
@@ -341,7 +368,7 @@ ul
 </code></pre>
 <p><a href="http://codepen.io/shimakyohsuke/pen/MyaKRP">CodePen で見る</a></p>
 <p>パンくずリスト</p>
-<pre><code>mixin breadcrumb(...items)
+<pre><code class="language-jade">mixin breadcrumb(...items)
   nav
     .breadcrumbs
       div(itemscope='itemscope', itemtype='http://data-vocabulary.org/Breadcrumb')
@@ -367,11 +394,11 @@ ul
 </code></pre>
 <p><a href="http://codepen.io/shimakyohsuke/pen/xVwVVb/">CodePen で見る</a></p>
 <hr>
-<h2 id="gulp" id="gulp">gulp を使ってコンパイル</h2>
+<h2 id="gulp-を使ってコンパイル" id="gulp">gulp を使ってコンパイル</h2>
 <p>gulp でのコンパイルタスクの記述は <code>gulpfile.js</code> を参考にしてください。</p>
-<h2 id="jade" id="jade">Jade を使って簡単な静的サイトなブログが作れる</h2>
+<h2 id="jade-を使って簡単な静的サイトなブログが作れる" id="jade">Jade を使って簡単な静的サイトなブログが作れる</h2>
 <p><a href="http://wintersmith.io/">Wintersmith</a> や <a href="https://hexo.io/">Hexo</a> などの Node.js 製の静的サイトジェネレータでも Jade のコンパイルに対応しているものも多いです。</p>
-<h2 id="-10" id="">その他テンプレートエンジン</h2>
+<h2 id="その他テンプレートエンジン" id="">その他テンプレートエンジン</h2>
 <p>Jade の記法が特殊で取り扱いしづらいという場合には、同じく Node.js 製のテンプレートエンジンとしてメジャーな EJS という選択肢もあります。</p>
 <p>EJS<br>
 <a href="http://ejs.co/">http://ejs.co/</a></p>
