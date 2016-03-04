@@ -1,3 +1,5 @@
+[[toc]]
+
 # Jade で始める新しい HTML の書き方
 
 - Jade は Node.js 製のテンプレートエンジンです。
@@ -11,7 +13,7 @@ Jade - Template Engine
 
 Jade でマークアップ！
 
-```
+```jade
 doctype html
 html(lang='en')
   head
@@ -35,7 +37,7 @@ html(lang='en')
 
 Jade ファイルが変換されたらこうなります。
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -78,7 +80,7 @@ Node.js の環境がない方はオンライン上でコードを書けるサー
 
 ##### サンプルファイルを [ダウンロード](https://github.com/kfug/handson/archive/try_jade.zip) するか、git 経由で clone します。
 
-```
+```bash
 $ git clone https://github.com/kfug/handson -b try_jade
 ```
 
@@ -86,13 +88,13 @@ $ git clone https://github.com/kfug/handson -b try_jade
 
 ##### 作業ディレクトリに移動
 
-```
+```bash
 $ cd [git clone したディレクトリ、もしくは zip ファイルを展開したディレクトリ]/handson/try_jade
 ```
 
 ##### パッケージのインストール
 
-```
+```bash
 $ npm install
 ```
 
@@ -104,7 +106,7 @@ handson/try_jade/jade/index.jade
 
 ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。
 
-```
+```jade
 //- index.jade
 doctype html
 html(lang='en')
@@ -120,13 +122,13 @@ html(lang='en')
 
 以下コマンドを実行
 
-```
+```bash
 $ gulp jade
 ```
 
 もしくは、
 
-```
+```bash
 $ npm run jade
 ```
 
@@ -150,7 +152,7 @@ $ npm run jade
 
 ※以下サンプルコード内の半角スペースは必ず必要です。
 
-```
+```jade
 //- index.jade
 doctype html
 html
@@ -198,7 +200,7 @@ html
 
 ### 変数
 
-```
+```jade
 //- index.jade
 doctype html
 html
