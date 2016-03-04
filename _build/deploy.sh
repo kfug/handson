@@ -13,7 +13,7 @@ else
 fi
 
 # Clean the tmp folders
-BUILD_FOLDER="_builddist"
+BUILD_FOLDER="_build/dist"
 rm -rf "$BUILD_FOLDER"
 
 # Checkout the current repo
