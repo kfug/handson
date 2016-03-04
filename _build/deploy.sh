@@ -13,7 +13,7 @@ else
 fi
 
 # Clean the tmp folders
-BUILD_FOLDER="_build/dist"
+BUILD_FOLDER="_builddist"
 rm -rf "$BUILD_FOLDER"
 
 # Checkout the current repo
@@ -28,6 +28,6 @@ npm run build
 
 cd $BUILD_FOLDER
 git checkout gh-pages
-git add . --force
+git add . --all --force
 git commit -m "Automatic deployment of $(git rev-parse HEAD)"
 git push origin gh-pages
