@@ -89,7 +89,11 @@ $ git clone https://github.com/kfug/handson -b try_jade
 ##### 作業ディレクトリに移動
 
 ```bash
-$ cd [git clone したディレクトリ、もしくは zip ファイルを展開したディレクトリ]/handson/try_jade
+$ cd handson/
+
+// or
+
+$ cd [zip ファイルを展開したディレクトリ]/handson-try_jade/
 ```
 
 ##### パッケージのインストール
@@ -102,7 +106,7 @@ $ npm install
 
 編集するファイルはこちらにあります。
 
-handson/try_jade/jade/index.jade
+`handson/jade/index.jade`
 
 ご使用されてるテキストエディターで、index.jade を開き、以下をコピペしてください。
 
@@ -132,7 +136,7 @@ $ gulp jade
 $ npm run jade
 ```
 
-`./public/` ディレクトリに HTML ファイルが作成されていますか？？
+`handson/public/` ディレクトリに HTML ファイルが作成されていますか？？
 
 ----
 
@@ -195,7 +199,6 @@ html
       li: a(href="http://kfug.jp/frontconf2016/") link
 ```
 
-
 [CodePen で見る](http://codepen.io/shimakyohsuke/pen/WwQraX)
 
 ### 変数
@@ -222,7 +225,7 @@ html
 
 <http://jade-lang.com/reference/iteration/>
 
-```
+```jade
 //- index.jade
 doctype html
 html
@@ -247,7 +250,7 @@ html
 
 #### 個人的によく使うやつ
 
-```
+```jade
 select(name="birthday_year", required)
   option(value='', selected='selected') -
     - var n = 1990
@@ -281,7 +284,7 @@ select(name="birthday_day", required)
 
 ※Markdown や CoffeeScript を Jade ファイル内に記述し HTML に変換する場合は、別途必要なパッケージがございます。
 
-```
+```jade
 doctype html
 html
   head
@@ -309,9 +312,17 @@ html
 
 <http://jade-lang.com/reference/includes/>
 
-**jade/ ディレクトリ内に sample2/ ディレクトリを作成します。**
+サンプルファイルを `sample1/` にご用意しております。
 
 ```
+handson/sample1/index.jade
+handson/sample1/_header.jade
+handson/sample1/_footer.html
+```
+
+**jade/ ディレクトリ内に sample1/ ディレクトリを作成し以下を作成します。**
+
+```jade
 //- jade/sample1/index.jade
 doctype html
 html
@@ -324,7 +335,7 @@ html
     include ./_footer.html
 ```
 
-```
+```jade
 //- jade/sample1/_head.jade
 head
   title Try Jade ハンズオン
@@ -332,16 +343,30 @@ head
   script(src='/javascripts/app.js')
 ```
 
-```
+```html
 <!-- jade/sample1/_footer.html -->
 <div id="footer">
   <p>Copyright (c) KFUG</p>
 </div>
 ```
 
+3ファイル書けたら、以下コマンドを実行
+
+```bash
+$ gulp jade
+```
+
+もしくは、
+
+```bash
+$ npm run jade
+```
+
+`handson/public/sample1/index.html` が作成されていますか？？
+
 コンパイル後の HTML
 
-```
+```html
 <!doctype html>
 <html>
   <head>
@@ -365,9 +390,16 @@ head
 
 <http://jade-lang.com/reference/extends/>
 
-**jade/ ディレクトリ内に sample2/ ディレクトリを作成します。**
+サンプルファイルを `sample2/` にご用意しております。
 
 ```
+handson/sample2/index.jade
+handson/sample2/_layout.jade
+```
+
+**jade/ ディレクトリ内に sample2/ ディレクトリを作成し以下を作成します。**
+
+```jade
 //- jade/sample2/_layout.jade
 doctype html
 html
@@ -381,7 +413,7 @@ html
     block content
 ```
 
-```
+```jade
 //- jade/sample2/index.jade
 extends ./_layout.jade
 
@@ -394,9 +426,23 @@ block content
   h1 My Article
 ```
 
+3ファイル書けたら、以下コマンドを実行
+
+```bash
+$ gulp jade
+```
+
+もしくは、
+
+```bash
+$ npm run jade
+```
+
+`handson/public/sample2/index.html` が作成されていますか？？
+
 コンパイル後の HTML
 
-```
+```html
 <!doctype html>
 <html>
   <head>
@@ -415,7 +461,7 @@ block content
 
 <http://jade-lang.com/reference/mixins/>
 
-```
+```jade
 mixin pet(name)
   li.pet= name
 
@@ -431,7 +477,7 @@ ul
 
 グローバルナビなどに。
 
-```
+```jade
 mixin gnav(id, ...items)
   ul(class=id)
     each item in items
@@ -448,10 +494,9 @@ mixin gnav(id, ...items)
 
 [CodePen で見る](http://codepen.io/shimakyohsuke/pen/MyaKRP)
 
-
 パンくずリスト
 
-```
+```jade
 mixin breadcrumb(...items)
   nav
     .breadcrumbs
