@@ -4,7 +4,8 @@
   "description": "ここはHandson用のリポシトリです。",
   "main": "index.js",
   "scripts": {
-    "build": "gulp --gulpfile _build/gulpfile.js"
+    "build": "gulp --gulpfile _build/gulpfile.js",
+    "deploy": "_build/deploy.sh"
   },
   "repository": {
     "type": "git",

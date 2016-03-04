@@ -14,7 +14,7 @@ var indexTemplate
 
 
 gulp.task('clean', ()=> {
-  rimraf.sync('dist')
+  rimraf.sync('dist/**/*.{html,js,css,png,gif}')
 })
 
 gulp.task('js', ()=> {
