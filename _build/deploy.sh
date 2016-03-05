@@ -26,6 +26,7 @@ fi
 
 cd $BUILD_FOLDER
 git checkout gh-pages
+git pull
 npm run build
 git add . --all --force
 git commit -m "Automatic deployment of $(git rev-parse HEAD)"
