@@ -14,7 +14,7 @@ Gulp 公式サイト
 サンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/try_gulp.zip)するか、git経由でcloneしてきます。
 
 ````
-$ git clone https://github.com/kfug/handson -b gulp
+$ git clone https://github.com/kfug/handson -b try_gulp
 ````
 
 ハンズオンを始める前に、
