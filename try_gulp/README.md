@@ -11,7 +11,7 @@ Gulp 公式サイト
 
 ## 00.はじめに
 
-サンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/gulp.zip)するか、git経由でcloneしてきます。
+サンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/try_gulp.zip)するか、git経由でcloneしてきます。
 
 ````
 $ git clone https://github.com/kfug/handson -b gulp
