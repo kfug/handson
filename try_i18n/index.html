@@ -1,0 +1,337 @@
+<!DOCTYPE html><html><head><meta charset="utf8"><title></title><link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css"><script src="../highlight.pack.js"></script></head><body><div class="markdown-body"><p><div class="table-of-contents"><ul><li><a href="#try-i18n-ハンズオン">Try i18n ハンズオン</a><ul><li><a href="#国際化と-i18n-のつながり">国際化と i18n のつながり</a></li><li><a href="#はじめに">はじめに</a></li><li><a href="#二つ目のバーション">二つ目のバーション</a></li><li><a href="#文字化け">文字化け</a></li><li><a href="#言語のコードを追加">言語のコードを追加</a></li><li><a href="#alternate-タグを追加">alternate タグを追加</a></li><li><a href="#言語のメニュー">言語のメニュー</a></li><li><a href="#言語の名前">言語の名前</a></li><li><a href="#残りのコンテンツを翻訳">残りのコンテンツを翻訳</a></li><li><a href="#残りの-nav-を翻訳">残りの Nav を翻訳</a></li><li><a href="#めんどくさい-google-翻訳バー">めんどくさい Google 翻訳バー</a></li><li><a href="#css-での言語対応">CSS での言語対応</a></li><li><a href="#ルートのサイト">ルートのサイト</a></li><li><a href="#ルートへのバックリンク">ルートへのバックリンク</a></li><li><a href="#自動リダイレクト">自動リダイレクト</a></li><li><a href="#json-の代わりに-csv">JSON の代わりに CSV</a></li><li><a href="#csv-を-google-で管理する">CSV を Google で管理する</a></li><li><a href="#facebook-用の-og-タグ">Facebook 用の OG タグ</a></li><li><a href="#facebook-の-like-ボタン">Facebook の Like ボタン</a></li><li><a href="#最後の言葉">最後の言葉</a></li></ul></li></ul></div></p>
+<h1 id="try-i18n-ハンズオン" id="try-i18n">Try i18n ハンズオン</h1>
+<p>日本語を読めない方または日本に住んでいない方と対応ができたとしたら、ウェブサイトで
+売り上げを上げたり、リーチを広げることができます。</p>
+<p>国際化のテーマは広いので、このハンズオンは翻訳だけにフォーカスをします。</p>
+<p><a href="frontconf2016_i18n_handson.pdf">発表資料 (pdf)</a>
+<a href="frontconf2016_i18n_handson.key">発表資料 (key)</a></p>
+<h2 id="国際化と-i18n-のつながり" id="i18n">国際化と i18n のつながり</h2>
+<p>ハンズオンを始める前に国際化や <code>i18n</code> の言葉の説明をします。</p>
+<blockquote>
+<p>1970年代か1980年代かにDECで作られた用法といわれる</p>
+</blockquote>
+<p><a href="https://ja.wikipedia.org/wiki/%E5%9B%BD%E9%9A%9B%E5%8C%96%E3%81%A8%E5%9C%B0%E5%9F%9F%E5%8C%96#i18n">i18n</a>  &quot;internationalisation&quot; と &quot;localization&quot; の違いは微妙です。簡単説明すると i18n は全世界の方々がコンテンツに手を入れることです。l10n は場所、通貨などに対応するコンテンツです。</p>
+<p>英語と日本語のウェブサイトは <strong>i18n</strong> と考えていいです。</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E5%90%88%E8%A1%86%E5%9B%BD%E3%83%89%E3%83%AB">USD</a> や <a href="https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%BB%E3%83%9D%E3%83%B3%E3%83%89">GBP</a> や <a href="https://ja.wikipedia.org/wiki/%E3%82%AA%E3%83%BC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%AA%E3%82%A2%E3%83%BB%E3%83%89%E3%83%AB">AUD</a>で買い物できるサイトは <strong>l10n</strong> として考えていいと思います。</p>
+<p>残念ながら違いがぼやけていますのであまり重要じゃないと思います。</p>
+<h2 id="はじめに" id="">はじめに</h2>
+<p>ハンズオンのために <a href="https://nodejs.org/">Node.js</a> が必要となります。</p>
+<p>そしてサンプルファイルを<a href="https://github.com/kfug/handson/archive/i18n.zip">ダウンロード</a>するか、 git 経由で clone してください。</p>
+<pre><code>$ git clone https://github.com/kfug/handson
+</code></pre>
+<p>ハンズオンを始める前に、</p>
+<pre><code>$ cd [ハンズオンの資料のディレクトリ]/try_i18n
+</code></pre>
+<p>とコマンドを使用し、<code>try_i18n</code> ディレクトリに入りましょう。</p>
+<h3 id="ハンズオンの使い方" id="">ハンズオンの使い方</h3>
+<p><code>try_i18n</code> のフォルダーに <code>build.js</code> というファイルが入っています。 <code>build.js</code> はフレームワークとライブラリーなしで動いています。ハンズオン中は <code>build.js</code> を書き変えが必要となります。</p>
+<p><code>node build.js</code> を呼ぶと <strong>すごく簡単な</strong> ビルドが動いています。ビルドで <code>src</code> や <code>template</code> のフォルダーに入っているファイルを使って <code>build</code> フォルダーにウェブサイトを書き出しています。</p>
+<p>例えば: ソースフォルダーに入っている <code>index.html</code> は　<code>{{head}}</code> のプレースホルダーがあります。ビルド中にはその <code>{{head}}</code> が <code>fillPlaceHolder</code> の関数で <code>template/head.html</code> にリプレースされています。その上は <code>template/head.html</code> に <code>{{title}}</code> というプレースホルダーが入っています。<code>build.js</code> の <code>VARIABLES</code> 変数に <code>title</code> というプロパティーが入っていますので　テンプレートの代わりにそれを使っています。</p>
+<p>ハンズオン中は一つ一つのステップごとに <code>node build.js</code> を読んでください。<code>build</code> フォルダーの中のファイルはそのままブラウザーを使って見てください。チェンジをすぐ見たい場合は <code>slr</code> みたいなウェブサーバーを使ってもいいと思います。(インストールは <code>npm i slr -g</code> 動かすのは <code>slr build</code>)</p>
+<p><em>メモ：全ての JavaScript コードは <a href="https://github.com/feross/standard">standard</a> フォーマッティングに書いています。</em></p>
+<h2 id="二つ目のバーション" id="">二つ目のバーション</h2>
+<p>翻訳のコストを減らすために、同じサイトストラクチャーを使って二つのサイトを書き出すのがはじめてのタスクです。</p>
+<p>そのために <code>build.js</code> のファイルを書き換えましょう。今のビルドコードの</p>
+<pre><code class="language-JavaScript">processFiles(SOURCE, TARGET, {
+  title: <span class="hljs-string">'Cool Homepage'</span>
+})
+</code></pre>
+<p>をこれに書き換えましょう:</p>
+<pre><code class="language-JavaScript">processFiles(SOURCE, path.join(TARGET, <span class="hljs-string">'ja'</span>), {
+  title: <span class="hljs-string">'クール ホームページ'</span>
+})
+processFiles(SOURCE, path.join(TARGET, <span class="hljs-string">'en'</span>), {
+  title: <span class="hljs-string">'Cool Homepage'</span>
+})
+</code></pre>
+<p>そうするとビルドの後で <code>build</code> フォルダーには二つのサイトがに入っています。</p>
+<h2 id="文字化け" id="">文字化け</h2>
+<p>今のテンプレートは文字コードが付いていません。普通は PHP などが <a href="http://www.websec-room.com/2013/03/02/359">HTTP の ContentType ヘッダー</a>を送ってきています。サーバーを使えない場合は HTML の中に <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#attr-charset">charset</a> のスペックが必要となります。</p>
+<p><code>template/header.html</code> に <code>&lt;meta charset=&quot;utf-8&quot; /&gt;</code> を第１行目につけてください。</p>
+<p><em>メモ： meta の html タグの順番は大事です。Charset のタグは絶対に第一のタイトルタグにしてください。</em></p>
+<h2 id="言語のコードを追加" id="">言語のコードを追加</h2>
+<p>Google などのクローラーは自分であなたのウェブサイトの言語を調べることがだいたいできます。そのクローラーが間違えないように <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/lang"><code>lang</code></a> のプロパティーを html タグにつけましょう。その言語は <a href="https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7">ISO 639</a> のコードにしてください。</p>
+<p><code>&lt;html&gt;</code> を　<code>&lt;html lang=&quot;...&quot;&gt;</code>　に変換してください。</p>
+<h2 id="alternate-タグを追加" id="alternate">alternate タグを追加</h2>
+<p>SEO のために alternate リンクをページにつけるのは大事です。Google の<a href="https://support.google.com/webmasters/answer/189077?hl=ja">三つの方法</a>の中では htmlタグがこのハンズオンのために一番簡単な方法です。 alternate のタグでそれぞれのページと別の言語のバーションにリンクします。</p>
+<p>例： <code>en/index.html</code> は <code>ja/index.html</code> にリンクして <code>ja/index.html</code> は <code>en/index.html</code> をリンクしないといけません。</p>
+<p><em>ヒント： <code>build.js</code> は <code>{{path}}</code> to <code>{{file}}</code> の変数を用意しています。</em></p>
+<h2 id="言語のメニュー" id="">言語のメニュー</h2>
+<p>今のウェブサイトを公開して Google で検索したら、それぞれのウェブサイトを見つけられるはずです。ただ、サイトのリンクは別の方法でもシェアできますので、その場合はユーザーが自分の言語を選ぶ必要があります。</p>
+<p>言語メニューは普通のメニューと同じく <code>&lt;nav&gt;</code> にしましょう。リンクは alternate のリンクと同じにしてください：</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"..."</span>&gt;</span>...<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+</code></pre>
+<h2 id="言語の名前" id="">言語の名前</h2>
+<p><code>en</code> と <code>ja</code> は技術者にはわかりやすいと思いますが普通の人はちゃんとした名前を好みます。</p>
+<p>言語メニューの名前選ぶ方法は二つが考えられます:</p>
+<p>(A) <code>English</code> と <code>Japanese</code>
+(B) <code>English</code> と <code>日本語</code></p>
+<p>(A)バーションは間違いです。日本語の方々の中には <code>Japanese</code> が読めない
+人がいるかもしれません。</p>
+<p><code>build.js</code> に英語版の新しいプロパティー <code>otherLangName</code> は <code>日本語</code> にしましょう。
+日本語版は <code>English</code> にしましょう。そして <code>template/nav.html</code> は</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">""</span>&gt;</span>{{otherLangName}}<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>`
+</code></pre>
+<p>は使うようにしましょう。</p>
+<p><em>ヒント：知らない言語の名前であれば <a href="https://ja.wikipedia.org/wiki/ISO_639-1%E3%82%B3%E3%83%BC%E3%83%89%E4%B8%80%E8%A6%A7">ISO 639 の一覧</a>で調べましょう。</em></p>
+<h2 id="残りのコンテンツを翻訳" id="">残りのコンテンツを翻訳</h2>
+<p>サンプルサイトのテキストは相変わらず英語です。それを日本語にしましょう。まずは <code>src/index.html</code> と <code>src/product.html</code> のテキストを <code>build.js</code> にコピーしましょう。</p>
+<pre><code class="language-JavaScript">processFiles(SOURCE, path.join(TARGET, <span class="hljs-string">'ja'</span>), {
+  title: <span class="hljs-string">'クール ホームページ'</span>,
+  lang: <span class="hljs-string">'ja'</span>,
+  otherLang: <span class="hljs-string">'en'</span>,
+  otherLangName: <span class="hljs-string">'English'</span>,
+  index: {
+    title: <span class="hljs-string">'...'</span>,
+    content: <span class="hljs-string">'...'</span>
+  },
+  product: {
+    title: <span class="hljs-string">'...'</span>,
+    content: <span class="hljs-string">'...'</span>
+  }
+})
+</code></pre>
+<p>それから <code>src/index.html</code> や <code>src/product.html</code> のテキストを新しいプレスホルダーに書き換えましょう。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{index.title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+...
+</code></pre>
+<p>日本語のコンテンツは</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>index.title</td>
+<td>Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこそ!</td>
+</tr>
+<tr>
+<td>index.content</td>
+<td>今日は国際化を学びましょう。プロダクトやエンタテインメントを世界中でシェアできるように。私たちのスキルは関西のために大切です。</td>
+</tr>
+<tr>
+<td>product.title</td>
+<td>会議用プロダクト!</td>
+</tr>
+<tr>
+<td>product.content</td>
+<td>何かを売らないといけません。この仕事でお金が入った方がいいですよね？</td>
+</tr>
+</tbody>
+</table>
+<h2 id="残りの-nav-を翻訳" id="nav">残りの Nav を翻訳</h2>
+<p>次のものはすぐできると思います。コンテンツと同じようにリンクの HTML タグを書き換えてください。</p>
+<pre><code>&lt;a href=&quot;...&quot;&gt;{{link.head}}&lt;/a&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>日本語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>link.home</td>
+<td>ホーム</td>
+</tr>
+<tr>
+<td>link.product</td>
+<td>商品</td>
+</tr>
+</tbody>
+</table>
+<h2 id="めんどくさい-google-翻訳バー" id="google">めんどくさい Google 翻訳バー</h2>
+<p>Google Chrome を使っている方は Google の自動翻訳システムを見たことがあるでしょう。</p>
+<p><a href="https://gyazo.com/8941842cd6bf8345f8904eba25ecb4ad"><img src="https://i.gyazo.com/8941842cd6bf8345f8904eba25ecb4ad.gif" alt="https://gyazo.com/8941842cd6bf8345f8904eba25ecb4ad"></a></p>
+<p>ただ一つの html タグを head に追加したらそのバーが出てるのを減らされます。以下のタグを <code>template/head.html</code> に追加してください。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"google"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"notranslate"</span> /&gt;</span>
+</code></pre>
+<p><a href="https://gyazo.com/6a976b0fcde6cb67f40ee1fd01d2bbc7"><img src="https://i.gyazo.com/6a976b0fcde6cb67f40ee1fd01d2bbc7.gif" alt="https://gyazo.com/6a976b0fcde6cb67f40ee1fd01d2bbc7"></a></p>
+<h2 id="css-での言語対応" id="css">CSS での言語対応</h2>
+<p>たまに言語によってスタイルシートを書き換える必要があります。スタイルシートは大きくなったらそれぞれの言語に分けた方がいいと思いますが例の CSS は小さくて一つのシートにするのは問題ないです。</p>
+<p>以前は HTML タグに <code>lang</code>のプロパティーを追加したために英語と日本語のサイトのフォントサイズが変わりました。</p>
+<p><a href="https://gyazo.com/0ad691fa108c96bd254a8c396d4da22c"><img src="https://i.gyazo.com/0ad691fa108c96bd254a8c396d4da22c.gif" alt="https://gyazo.com/0ad691fa108c96bd254a8c396d4da22c"></a></p>
+<p>だからフォントサイズを合わせましょう。</p>
+<pre><code class="language-CSS"><span class="hljs-selector-tag">html</span> {
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.5em</span>;
+}
+</code></pre>
+<p>そして例のために日本版を</p>
+<pre><code class="language-CSS"><span class="hljs-selector-tag">html</span><span class="hljs-selector-attr">[lang=ja]</span> {
+  <span class="hljs-attribute">-ms-writing-mode</span>: tb-rl;
+  <span class="hljs-attribute">writing-mode</span>: vertical-rl;
+}
+</code></pre>
+<p>にすると日本版は縦になっています。バンザーイ！
+<a href="https://gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9"><img src="https://i.gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9.png" alt="https://gyazo.com/7bfdc525f57a046a6671c0a03ac73bc9"></a></p>
+<h2 id="ルートのサイト" id="">ルートのサイト</h2>
+<p>今のサイトは <code>/en/</code> または <code>/ja</code> を使わないとアクセスできません。それをこれから改善しましょう。<code>/</code> サイトに特別なページを用意しましょう。まずは <code>build.js</code> に新しいステップをつけましょう。</p>
+<pre><code>processFiles(path.join(ROOT, 'global'), TARGET, {})
+</code></pre>
+<p>この行をつけると <code>global</code> フォルダーをルートに書き出してきます。<code>global</code> というフォルダーはまだないので作ってください。そして <code>global</code> に <code>index.html</code> を作りましょう。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf8"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"en/css/style.css"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"en/index.html"</span>&gt;</span>English<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"ja/index.html"</span>&gt;</span>日本語<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h2 id="ルートへのバックリンク" id="">ルートへのバックリンク</h2>
+<p>ルートサイトがありますが SEO のために <code>en</code> と <code>ja</code> のサイトにルートへのリンクをつけましょう。（詳しくは <a href="https://support.google.com/webmasters/answer/189077?hl=ja">Googleのサイト</a>に) バックリンクは <code>x-default</code> の link ヘッダータグです。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"alternate"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"../"</span> <span class="hljs-attr">hreflang</span>=<span class="hljs-string">"x-default"</span> /&gt;</span>
+</code></pre>
+<p>そのリンクは <code>template/head.html</code> につけましょう。</p>
+<h2 id="自動リダイレクト" id="">自動リダイレクト</h2>
+<p>基本的に <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#The_Accept-Language_header">http の Accept-Language</a> のヘッダーはリダイレクトのために使えますがユーザーはそれをあまり喜びません。MDN にも書いてあります。</p>
+<blockquote>
+<p>Site-designers must not be over-zealous by using language detection via this header as it can lead to a poor user experience:</p>
+<ul>
+<li>They should always provide a way to overcome the server-chosen language, e.g., by providing small links near the top of the page. Most user-agents provide a default value for the Accept-Language: header, adapted to the user interface language and end users often do not modify it, either by not knowing how, or by not being able to do it, as in an Internet café for instance.</li>
+<li>Once a user has overridden the server-chosen language, a site should no longer use language detection and should stick with the explicitly-chosen language.. In other words, only entry pages of a site should select the proper language using this header.</li>
+</ul>
+</blockquote>
+<p>日本語に翻訳:</p>
+<blockquote>
+<p>ユーザーエキスペリエンスが悪くならないようにサイトデデザイナーは自動言語検出を使いすぎない方がいいです：</p>
+<ul>
+<li>どんな時でもサーバーが選んだ言語を変える方法を用意した方がいいです。例えば：ページの上の方に言語リンクの一覧をつける。普段はユーザーが Accept-Language ヘッダーのディフォルト設定を使っています。理由はその設定があるのを知らないか設定の変換の許可がないかからです。</li>
+<li>一度ユーザーがサーバーの選んだ言語を変えたら、自動システムはやめた方がいいです。別の言い方をするとリダイレクトはエントリーページだけに使った方がいいです。</li>
+</ul>
+</blockquote>
+<p>その通りに以下のスクリプトが用意してあります。</p>
+<pre><code class="language-JavaScript">autoDetect()
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">autoDetect</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">if</span> (!localStorage) {
+    <span class="hljs-keyword">return</span> <span class="hljs-comment">// 保存できない場合はリダイレクトしない</span>
+  }
+
+  <span class="hljs-keyword">if</span> (localStorage.getItem(<span class="hljs-string">'firstRedirect'</span>)) {
+    <span class="hljs-keyword">return</span> <span class="hljs-comment">// 以前リダイレクトしたから今回はリダイレクトしない</span>
+  }
+
+  <span class="hljs-comment">// 今回のリダイレクトを保存する</span>
+  localStorage.setItem(<span class="hljs-string">'firstRedirect'</span>, <span class="hljs-literal">true</span>)
+
+  <span class="hljs-comment">// ブラウザーの言語</span>
+  <span class="hljs-keyword">var</span> lang = getBrowserLanguage()
+
+  <span class="hljs-comment">// 言語を選ぶ</span>
+  lang = lang.toLowerCase()
+  lang = (lang === <span class="hljs-string">'ja'</span> || lang == <span class="hljs-string">'ja_jp'</span>) ? <span class="hljs-string">'ja'</span> : <span class="hljs-string">'en'</span>
+
+  <span class="hljs-built_in">document</span>.location.assign(lang + <span class="hljs-string">'/index.html'</span>)
+}
+
+<span class="hljs-comment">// クロスブラウザーの言語を調べるスクリプト</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBrowserLanguage</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">var</span> nav = navigator
+  <span class="hljs-keyword">return</span> (nav.languages &amp;&amp; nav.languages[<span class="hljs-number">0</span>])
+    || nav.userLanguage
+    || nav.language
+    || <span class="hljs-string">'en-US'</span> 
+}
+</code></pre>
+<p>そのスクリプトを <code>global/index.html</code> に追加してください。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="undefined">
+  ...
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<h2 id="json-の代わりに-csv" id="json-csv">JSON の代わりに CSV</h2>
+<p>今までは <code>build.js</code> のデータはただの JavaScript オブジェクトです。翻訳者にそれを渡すのが難しいです。CSV データに書き換えるとこれからのプロセスが簡単になります。</p>
+<p>CSV を Node.js で使うために <a href="https://www.npmjs.com/package/csv-parse"><code>csv-parse</code></a> パッケージを <code>try_i18n</code> のフォルダーにインストールしないといけません。</p>
+<pre><code>$ npm init -y; npm i csv-parse
+</code></pre>
+<p>そしてデータを <code>lang.csv</code> に書き換えましょう。</p>
+<pre><code class="language-csv">id,en,ja
+title,&quot;Cool Homepage&quot;,&quot;クール ホームページ&quot;
+lang,en,ja
+otherLang,ja,en
+otherLangName,日本語,English
+index.title,&quot;Welcome to the Frontend Conference 2016!&quot;,&quot;Ｆｒｏｎｔｅｎｄ  Ｃｏｎｆｅｒｅｎｃｅ  ２０１６にようこそ!&quot;
+index.content,&quot;Today we will study internationalization to bring commerce and entertainment from and to Osaka. Our skill is important for making Kansai better.&quot;,&quot;今日は国際化を学びましょう。プロダクトやエンタテインメントを世界中でシェアできるように。私たちのスキルは関西のために大切です。&quot;
+product.title,&quot;Product for the conference!&quot;,&quot;会議用プロダクト!&quot;
+product.content,&quot;Because you will need to buy something, else it isn't gonna pay for itself.&quot;,&quot;何かを売らないといけません。この仕事でお金が入った方がいいですよね？&quot;
+link.home,&quot;Home&quot;,&quot;ホーム&quot;
+link.product,&quot;Product&quot;,&quot;商品&quot;
+</code></pre>
+<p><code>build.js</code> の CSV 用の変数 <code>readLangCSV</code> は用意してあります。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">var</span> ALL_VARIABLES = readLangCSV(<span class="hljs-string">'lang.csv'</span>, [<span class="hljs-string">'en'</span>, <span class="hljs-string">'ja'</span>])
+</code></pre>
+<p><code>ALL_VARIABLES</code> にこのようなオブジェクトが入っています。</p>
+<pre><code class="language-JavaScript">{ en:
+   { title: <span class="hljs-string">'Cool Homepage'</span>,
+     ... } },
+  ja:
+   { title: <span class="hljs-string">'クール ホームページ'</span>,
+     ... } }
+</code></pre>
+<p>そうして <code>ALL_VARIABLES</code> の変数を使って <code>processFiles</code> を書き換えてください。</p>
+<pre><code class="language-JavaScript">processFiles(SOURCE, path.join(TARGET, <span class="hljs-string">'en'</span>), ALL_VARIABLES.en)
+processFiles(SOURCE, path.join(TARGET, <span class="hljs-string">'ja'</span>), ALL_VARIABLES.ja)
+</code></pre>
+<h2 id="csv-を-google-で管理する" id="csv-google">CSV を Google で管理する</h2>
+<p>CSV ファイルを GIT またはメールで管理するワークフローは、翻訳者には不便なことがあります。
+<a href="https://docs.google.com/spreadsheets/">Google Spreadsheets</a>を使うと幾つかいいことがあります。<code>lang.csv</code> のデータを新しいシートにインポートして下さい。</p>
+<p><a href="https://gyazo.com/62f95eadf9a5b79022b4bf29f91400cd"><img src="https://i.gyazo.com/62f95eadf9a5b79022b4bf29f91400cd.gif" alt="https://gyazo.com/62f95eadf9a5b79022b4bf29f91400cd"></a>
+<a href="https://gyazo.com/a6a1dfc733c19bf54444791521335b4d"><img src="https://i.gyazo.com/a6a1dfc733c19bf54444791521335b4d.gif" alt="https://gyazo.com/a6a1dfc733c19bf54444791521335b4d"></a></p>
+<p>スプレッドシートを作った時に翻訳者とシェアする。</p>
+<p><a href="https://gyazo.com/25306952e76253617e679f13c357ea16"><img src="https://i.gyazo.com/25306952e76253617e679f13c357ea16.gif" alt="https://gyazo.com/25306952e76253617e679f13c357ea16"></a></p>
+<p>そしてノティフィケーション設定をつけましょう。</p>
+<p><a href="https://gyazo.com/b6d1ac27c49920e3497ca7dc7a2c2653"><img src="https://i.gyazo.com/b6d1ac27c49920e3497ca7dc7a2c2653.gif" alt="https://gyazo.com/b6d1ac27c49920e3497ca7dc7a2c2653"></a></p>
+<p>そうすると翻訳者または別のチームメンバーは何かチェンジがあった場合すぐメールでノティフィケーションが入ります。変わった時にすぐに CSV エキスパートしたらすぐサイトをアップデートできます。</p>
+<p><a href="https://gyazo.com/12029c546e04d7525452a828ace036e8"><img src="https://i.gyazo.com/12029c546e04d7525452a828ace036e8.gif" alt="https://gyazo.com/12029c546e04d7525452a828ace036e8"></a></p>
+<h2 id="facebook-用の-og-タグ" id="facebook-og">Facebook 用の OG タグ</h2>
+<p>Google だけではなくて Facebook も国際化のルールがあります。まずは FB は全ての ISO 639 の
+言語に<a href="https://developers.facebook.com/docs/internationalization#locales">対応していません</a>。<a href="http://www.facebook.com/translations/FacebookLocales.xml">言語の XML</a>をチェックすると <code>en</code> の代わりに <code>en_US</code> などを使わないといけません。 <code>ja</code> は <code>ja_JP</code> になります。</p>
+<p>それを踏まえて <code>og:language</code> のタグをつけましょう。<code>lang.csv</code>　に <code>fbLang</code> をつけるのを忘れないでください。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"og:locale"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"{{fbLang}}"</span> /&gt;</span>
+</code></pre>
+<p><em>残念ながら Facebook の言語サポートはサーバーソフトなしでは対応できません。別の<a href="https://developers.facebook.com/docs/internationalization#locales">言語に対応したい場合</a> は <code>?fb_locale=ja_JP</code> または <code>?fb_locale=en_US</code> のリクエストでそれぞれのバーションを出さないといけません。今のサイトの URL パターンを <code>http://site.com/product.html?fb_locale=en_US</code> にするのが役に立つと思います。</em></p>
+<h2 id="facebook-の-like-ボタン" id="facebook-like">Facebook の Like ボタン</h2>
+<p><a href="http://ogp.me/"><code>og</code></a>タグがサイトについてからはサイトもシェアしたいですよね。そのまま <a href="https://developers.facebook.com/docs/plugins/like-button">Facebook のシェアスクリプト</a>を使って Like ボタンをつけたら <code>en_GB</code> の UI が出てきます。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"fb-like"</span> <span class="hljs-attr">data-href</span>=<span class="hljs-string">"https://developers.facebook.com/docs/plugins/"</span> <span class="hljs-attr">data-layout</span>=<span class="hljs-string">"standard"</span> <span class="hljs-attr">data-action</span>=<span class="hljs-string">"like"</span> <span class="hljs-attr">data-show-faces</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">data-share</span>=<span class="hljs-string">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"fb-root"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">d, s, id</span>) </span>{
+  <span class="hljs-keyword">var</span> js, fjs = d.getElementsByTagName(s)[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">if</span> (d.getElementById(id)) <span class="hljs-keyword">return</span>;
+  js = d.createElement(s); js.id = id;
+  js.src = <span class="hljs-string">"//connect.facebook.net/en_GB/sdk.js#xfbml=1&amp;version=v2.5&amp;appId=&lt;app_id&gt;"</span>;
+  fjs.parentNode.insertBefore(js, fjs);
+}(<span class="hljs-built_in">document</span>, <span class="hljs-string">'script'</span>, <span class="hljs-string">'facebook-jssdk'</span>));</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>ちゃんと言語が出るように頑張りたかったらスクリプトの <code>en_GB</code> の部分の代わりに以前に用意した <code>{{fbLang}}</code> を使って <code>template/footer.html</code> に追加してください。</p>
+<p><em>メモ：<code>build</code>フォルダーの中のファイルをそのままブラウザーで開いたら Facebook のボタンが出てきません。ウェブスペースにアップロードしたら動くようになります。ローカルでサイトをテストしたい場合はパソコンにサーバーを立ち上げてください。私は開発するためによく <a href="https://www.npmjs.com/package/slr"><code>slr</code></a>を使います。</em></p>
+<h2 id="最後の言葉" id="">最後の言葉</h2>
+<p><strong>お疲れ様です！</strong> この小さなサイトで一応翻訳ワークフローができたと思います。それ以上は色々細かいことがありますが、このワークフローを使うと一応自分のウェブサイトを翻訳できると思います。</p>
+<h3 id="翻訳サービスについて" id="">翻訳サービスについて</h3>
+<p>「はい！サイトを翻訳したい！」と思うようになったら、たぶん次の質問は「翻訳者どこで見つけるか？」となります。基本的に最近では三つのオプションがあります。</p>
+<ul>
+<li><strong>オンライン翻訳サービス</strong>:一般的に最近では翻訳用の<a href="https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%A9%E3%82%A6%E3%83%89%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%B3%E3%82%B0">クラウドソーシングサービス</a>があります。<a href="https://gengo.com/ja/">gengo</a>はその中で一番人気のあるサービスです。</li>
+<li><strong>サイト翻訳サービス</strong>:
+ウェブサイトだけを翻訳するサービスも幾つかあります。<a href="https://localizejs.com/ja/">localizejs</a>は最近気になっています。</li>
+<li><strong>翻訳オフィス</strong>:
+翻訳のために上のサービスで足りるかもしれません。ただ翻訳はコンテンツだけではなく意味の翻訳のが大事だと思います。安心できるような翻訳のためには直接話せる翻訳者がおすすめです。最終チェックのためだけでも。特に専門的な内容のテキスト(契約など）はウェブのサービスでは対応していないので翻訳オフィスをおすすめします。それぞれの言語のネーティブスピーカーがいいと思います。私は <a href="http://www.inscribe-consulting.jp/">Inscribe Language Consulting</a> を使います。</li>
+</ul>
+<h3 id="ツールリスト" id="">ツールリスト</h3>
+<p>今回使ったツールは全て軽くてあまりフィーチャーがありません。それより格好いいサイトをもっと早く国際化したいと思ったら以下のリンクリストを見てください。</p>
+<ul>
+<li>時間: <a href="http://momentjs.com/docs/#/i18n/">Moment.js</a></li>
+<li>JS一般的: <a href="http://i18next.com/">i18n.next</a>, <a href="http://www.localeplanet.com/api/index.html">Localeplanet</a></li>
+<li>Grunt: <a href="https://www.npmjs.com/package/grunt-static-i18n">grunt-static-i18n</a>, <a href="https://www.npmjs.com/package/grunt-i18n">grunt-i18n</a>, <a href="https://www.npmjs.com/package/grunt-i18n-gspreadsheet">grunt-i18n-gspreadsheet</a>, <a href="https://www.npmjs.com/search?q=grunt+i18n">...</a></li>
+<li>Gulp: <a href="https://www.npmjs.com/package/gulp-i18n">gulp-i18n</a>, <a href="https://www.npmjs.com/package/gulp-i18n-gspreadsheet">gulp-i18n-gspreadsheet</a>, <a href="https://www.npmjs.com/package/gulp-i18n-localize">gulp-i18n-localize</a>, <a href="https://www.npmjs.com/search?q=gulp+i18n">...</a></li>
+<li>翻訳 API: <a href="https://gengo.com/ja/developers/">gengo</a>, <a href="https://help.localizejs.com/docs/installation">localizejs</a></li>
+<li>国の旗: <a href="http://lipis.github.io/flag-icon-css/">flag-icon-css</a>, <a href="http://tkrotoff.github.io/famfamfam_flags/">FAMFAMFAM Flag Icons</a>, <a href="http://365icon.com/icon-styles/ethnic/classic2/">243 country icons</a></li>
+</ul>
+</div></body></html>
