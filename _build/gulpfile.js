@@ -75,8 +75,10 @@ gulp.task('html', ['load_template'], ()=> {
       }
     }))
     .pipe(through2.obj(function (data, enc, cb) {
+      console.log("Found: ")
+      console.log(data)
       data.contents = new Buffer(indexTemplate({
-        title: data.dirname,
+        title: '',
         markdown: data.contents
       }))
       this.push(data)
