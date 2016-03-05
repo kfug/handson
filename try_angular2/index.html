@@ -1,0 +1,466 @@
+<!DOCTYPE html><html><head><meta charset="utf8"><title></title><link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css"><script src="../highlight.pack.js"></script></head><body><div class="markdown-body"><p><div class="table-of-contents"><ul><li><a href="#angular2-ハンズオン">Angular2 ハンズオン</a><ul><li><a href="#はじめに">はじめに</a></li><li><a href="#まずは肩慣らし">まずは肩慣らし</a></li></ul></li><li><a href="#webアプリを作ろう">Webアプリを作ろう</a><ul><li><a href="#データバインディング">データバインディング</a></li><li><a href="#テンプレートの繰り返しと条件分岐、そしてcomponentのスタイル">テンプレートの繰り返しと条件分岐、そしてComponentのスタイル</a></li><li><a href="#子コンポーネント">子コンポーネント</a></li><li><a href="#service">Service</a></li></ul></li><li><a href="#routing">Routing</a></li></ul></div></p>
+<h1 id="angular2-ハンズオン" id="angular2">Angular2 ハンズオン</h1>
+<p>これはAngular 2ハンズオン@FRONTEND CONFERENCE 2016用の資料です。</p>
+<h2 id="はじめに" id="">はじめに</h2>
+<p>このハンズオンではAngular 2公式の<a href="https://angular.io/docs/ts/latest/quickstart.html">チュートリアル</a>を行います。
+開発環境として、ブラウザ上でTypeScript開発のできる<a href="https://plnkr.co/">Plunker</a>を使用します。
+Angularのバージョンは、執筆時点での最新版の2.0.0-beta.8を使用しています。</p>
+<h2 id="まずは肩慣らし" id="">まずは肩慣らし</h2>
+<p>以下のURLにプロジェクトの雛形を用意しています。</p>
+<p>https://plnkr.co/edit/lQSTnTR8oZp7sauUjlnI</p>
+<p>早速、Angular 2アプリの構成単位となるComponentを実装してみましょう。
+「New File」から新しく <code>app/app.component.ts</code> というファイルを追加してください。
+.tsはTypeScriptファイルの拡張子です。
+追加したファイルに以下のようなコードを実装してください。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+
+@Component({
+    selector: <span class="hljs-string">'my-app'</span>,
+    template: <span class="hljs-string">'&lt;h1&gt;My First Angular 2 App&lt;/h1&gt;'</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{ }
+</code></pre>
+<p>さて、<code>import</code>、<code>@Component(…)</code>、<code>export</code>、<code>class AppComponent {}</code>といきなり見慣れないコードが並んでいるかもしれません。
+これらは、JavaScriptの新しい構文を先取りしたものになります。
+<code>import</code>と<code>export</code>はモジュール関連の構文、<code>class</code>はクラス定義の構文です。
+<code>@</code>から始まる部分はデコレータといって、ここでは<code>AppComponent</code>クラスに<code>Component</code>としての機能を付け加えるような役割をしています。</p>
+<p>Angular 2の最小のコンポーネントはこれだけです。
+<code>template</code>の中身を自分の好きな文字列やHTMLにしても大丈夫ですよ。</p>
+<p>このComponentを画面に表示してみましょう。
+新に<code>app/main.ts</code>というファイルを追加します。
+中身は以下の通りです。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {bootstrap}    <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/platform/browser'</span>
+<span class="hljs-keyword">import</span> {AppComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>
+
+bootstrap(AppComponent);
+</code></pre>
+<p>2行目で<code>app/app.component.ts</code>で定義した<code>AppComponent</code>を読み込んでいます。
+そして、<code>bootstrap</code>という関数に<code>AppComponent</code>を与えています。
+これで<code>AppComponent</code>を使う準備は整いました。</p>
+<p>ここで、<code>index.html</code>の<code>body</code>は以下のようになっています。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">my-app</span>&gt;</span>
+    loading...
+  <span class="hljs-tag">&lt;/<span class="hljs-name">my-app</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</code></pre>
+<p><code>&lt;my-app&gt;&lt;/my-app&gt;</code>という見慣れないタグがありますね。
+これは<code>app/app.component.ts</code>で<code>selector: 'my-app'</code>と書いていた部分に対応します。
+つまり、<code>&lt;my-app&gt;&lt;/my-app&gt;</code>と書いてある部分に<code>AppComponent</code>の内容が入ります。</p>
+<p>PlunkerでPreviewを見ると、ちゃんと<code>template</code>に書いた内容が表示されたでしょうか？
+Angular 2の基本は、このようにComponentを作ることとComponentを使うことだけです。</p>
+<p>ここまで進めた結果を以下のURLにまとめています。</p>
+<p>https://plnkr.co/edit/JRoujsC9Iyev6KdQPDWK</p>
+<h1 id="webアプリを作ろう" id="web">Webアプリを作ろう</h1>
+<p>ここまでは簡単すぎましたか？
+Angularの魅力をもっと知るために、ユーザーの入力があって、複数ページから構成されるようなWebアプリの実装に進みましょう。</p>
+<p>まずは完成図を見てください。</p>
+<p>https://angular.io/resources/live-examples/tutorial/ts/plnkr.html</p>
+<p>これが、Angular 2を使って、全部で200行ぐらいのTypeScriptで実装されています。
+順に実装していきましょう。</p>
+<h2 id="データバインディング" id="">データバインディング</h2>
+<p><code>app.component.ts</code>の内容を以下のように変更してください。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+
+interface Hero {
+  id: number;
+  name: string;
+}
+
+@Component({
+  selector: <span class="hljs-string">'my-app'</span>,
+  template:<span class="hljs-string">`
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;h2&gt;{{hero.name}} details!&lt;/h2&gt;
+    &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{hero.id}}&lt;/div&gt;
+    &lt;div&gt;
+      &lt;label&gt;name: &lt;/label&gt;
+      &lt;div&gt;&lt;input [(ngModel)]="hero.name" placeholder="name"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  `</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
+  public title = <span class="hljs-string">'Tour of Heroes'</span>;
+  public hero: Hero = {
+    id: <span class="hljs-number">1</span>,
+    name: <span class="hljs-string">'Windstorm'</span>
+  };
+}
+</code></pre>
+<p>また新しい構文がいくつか出てきました。</p>
+<p>まず、<code>interface</code>では<code>Hero</code>インタフェースを定義しています。
+ここでは、<code>Hero</code>型は数値型の<code>id</code>と文字列型の<code>name</code>を持つことを宣言しています。
+型が出てきてTypeScriptらしくなってきました。
+Plunkerではなく、TypeScriptをオフラインコンパイルする場合は型のエラーがわかるので大規模な開発がやりやすくなります。</p>
+<p>次に、<code>template</code>の文字列を<code>'</code>でも<code>&quot;</code>でもなく、<code>`</code>で囲っています。
+これはtemplate stringという構文です。
+本来は、文字列の中に変数の値を埋め込むための構文ですが、template stringの中は自由に改行できるので、<code>template</code>のように複数行にわたる長い文字列を書くときには便利です。</p>
+<p>前は<code>AppComponent</code>の中身が空でしたが、今回は<code>title</code>と<code>hero</code>というプロパティを持っています。
+そして、テンプレートの中に<code>{{title}}</code>や<code>{{hero.name}}</code>といった記述があります。
+<code>AppComponent</code>のプロパティがこれらの場所に展開されます。</p>
+<p><code>[(ngModel)]=&quot;hero.name&quot;</code>も見慣れない記法ですよね。
+ここでは<code>ngModel</code>という双方向バインディングのための組み込みDirectiveを利用しています。
+双方向バインディングによって、フォームの値変更が即座にモデル(<code>AppComponent</code>のプロパティ)の値に反映され、表示文字列も変更されます。</p>
+<p>双方向バインディングはAngular 1系でも売りの一つでした。
+フレームワークを使わずに双方向バインディングを実装するとなると結構大変です。</p>
+<p>ここまでのソースを以下のURLにまとめています。</p>
+<p>https://plnkr.co/edit/l7xYXFI40DKnbJWC2J5K</p>
+<h2 id="テンプレートの繰り返しと条件分岐、そしてcomponentのスタイル" id="component">テンプレートの繰り返しと条件分岐、そしてComponentのスタイル</h2>
+<p>次は、Heroを一つじゃなくてリスト表示し、なおかつクリックして選択したHeroの詳細情報を表示するようにしましょう。
+<code>app/app.component.ts</code>を以下のように書き換えます。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+
+interface Hero {
+  id: number;
+  name: string;
+}
+
+@Component({
+  selector: <span class="hljs-string">'my-app'</span>,
+  template:<span class="hljs-string">`
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;h2&gt;My Heroes&lt;/h2&gt;
+    &lt;ul class="heroes"&gt;
+      &lt;li *ngFor="#hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)"&gt;
+        &lt;span class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div *ngIf="selectedHero"&gt;
+      &lt;h2&gt;{{selectedHero.name}} details!&lt;/h2&gt;
+      &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{selectedHero.id}}&lt;/div&gt;
+      &lt;div&gt;
+        &lt;label&gt;name: &lt;/label&gt;
+        &lt;input [(ngModel)]="selectedHero.name" placeholder="name"/&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `</span>,
+  styles:[<span class="hljs-string">`
+    .selected {
+      background-color: #CFD8DC !important;
+      color: white;
+    }
+    .heroes {
+      margin: 0 0 2em 0;
+      list-style-type: none;
+      padding: 0;
+      width: 10em;
+    }
+    .heroes li {
+      cursor: pointer;
+      position: relative;
+      left: 0;
+      background-color: #EEE;
+      margin: .5em;
+      padding: .3em 0;
+      height: 1.6em;
+      border-radius: 4px;
+    }
+    .heroes li.selected:hover {
+      background-color: #BBD8DC !important;
+      color: white;
+    }
+    .heroes li:hover {
+      color: #607D8B;
+      background-color: #DDD;
+      left: .1em;
+    }
+    .heroes .text {
+      position: relative;
+      top: -3px;
+    }
+    .heroes .badge {
+      display: inline-block;
+      font-size: small;
+      color: white;
+      padding: 0.8em 0.7em 0 0.7em;
+      background-color: #607D8B;
+      line-height: 1em;
+      position: relative;
+      left: -1px;
+      top: -4px;
+      height: 1.8em;
+      margin-right: .8em;
+      border-radius: 4px 0 0 4px;
+    }
+  `</span>]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
+  title = <span class="hljs-string">'Tour of Heroes'</span>;
+  heroes = HEROES;
+  selectedHero: Hero;
+  onSelect(hero: Hero) { <span class="hljs-keyword">this</span>.selectedHero = hero; }
+}
+
+<span class="hljs-keyword">var</span> HEROES: Hero[] = [
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">11</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mr. Nice"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">12</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Narco"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">13</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Bombasto"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">14</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Celeritas"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">15</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Magneta"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">16</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"RubberMan"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">17</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Dynama"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">18</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Dr IQ"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">19</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Magma"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Tornado"</span> }
+];
+</code></pre>
+<h2 id="子コンポーネント" id="">子コンポーネント</h2>
+<p>Heroの詳細を表示する機能をひとまとまりとしてComponent化してみます。
+このComponentを子Componentとして、親Componentである<code>AppComponent</code>から利用します。</p>
+<p>まず、<code>Hero</code>インタフェースは子コンポーネントと親コンポーネントの両方で使用したいので、新たなファイルに移しましょう。
+<code>app/hero.ts</code>を作り、以下のような中身にします。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">export</span> interface Hero {
+  id: number;
+  name: string;
+}
+</code></pre>
+<p>次に子Componentの実装です。
+新たに<code>app/hero-detail.component.ts</code>を作り、内容を以下の通りにします。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-hero-detail'</span>,
+  template: <span class="hljs-string">`
+    &lt;div *ngIf="hero"&gt;
+      &lt;h2&gt;{{hero.name}} details!&lt;/h2&gt;
+      &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{hero.id}}&lt;/div&gt;
+      &lt;div&gt;
+        &lt;label&gt;name: &lt;/label&gt;
+        &lt;input [(ngModel)]="hero.name" placeholder="name"/&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  `</span>,
+  inputs: [<span class="hljs-string">'hero'</span>]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeroDetailComponent</span> </span>{
+  hero: Hero;
+}
+</code></pre>
+<p>また、<code>app/app.component.ts</code>を以下のように修正します。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> {HeroDetailComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero-detail.component'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-app'</span>,
+  template:<span class="hljs-string">`
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;h2&gt;My Heroes&lt;/h2&gt;
+    &lt;ul class="heroes"&gt;
+      &lt;li *ngFor="#hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)"&gt;
+        &lt;span class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;my-hero-detail [hero]="selectedHero"&gt;&lt;/my-hero-detail&gt;
+  `</span>,
+  styles:[<span class="hljs-string">`
+    .selected {
+      background-color: #CFD8DC !important;
+      color: white;
+    }
+    .heroes {
+      margin: 0 0 2em 0;
+      list-style-type: none;
+      padding: 0;
+      width: 10em;
+    }
+    .heroes li {
+      cursor: pointer;
+      position: relative;
+      left: 0;
+      background-color: #EEE;
+      margin: .5em;
+      padding: .3em 0;
+      height: 1.6em;
+      border-radius: 4px;
+    }
+    .heroes li.selected:hover {
+      background-color: #BBD8DC !important;
+      color: white;
+    }
+    .heroes li:hover {
+      color: #607D8B;
+      background-color: #DDD;
+      left: .1em;
+    }
+    .heroes .text {
+      position: relative;
+      top: -3px;
+    }
+    .heroes .badge {
+      display: inline-block;
+      font-size: small;
+      color: white;
+      padding: 0.8em 0.7em 0 0.7em;
+      background-color: #607D8B;
+      line-height: 1em;
+      position: relative;
+      left: -1px;
+      top: -4px;
+      height: 1.8em;
+      margin-right: .8em;
+      border-radius: 4px 0 0 4px;
+    }
+  `</span>],
+  directives: [HeroDetailComponent]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
+  title = <span class="hljs-string">'Tour of Heroes'</span>;
+  heroes = HEROES;
+  selectedHero: Hero;
+  onSelect(hero: Hero) { <span class="hljs-keyword">this</span>.selectedHero = hero; }
+}
+
+<span class="hljs-keyword">var</span> HEROES: Hero[] = [
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">11</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mr. Nice"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">12</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Narco"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">13</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Bombasto"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">14</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Celeritas"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">15</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Magneta"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">16</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"RubberMan"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">17</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Dynama"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">18</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Dr IQ"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">19</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Magma"</span> },
+  { <span class="hljs-string">"id"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Tornado"</span> }
+];
+</code></pre>
+<h2 id="service" id="service">Service</h2>
+<p>Componentは画面の表示に集中するべきです。
+Componentから画面表示と関係の薄いロジックを切り離すことで、変更に強い開発ができるようになります。
+Angular 2では、このようなロジックをServiceとして定義することができます。</p>
+<p>Serviceとは具体的にどのようなものでしょうか。
+実用的なWebアプリでは、サーバと通信をしてデータベースからデータの取得をしたりすると思います。
+例えば、このようなデータ取得のロジックはServiceに切り出すことができます。</p>
+<p>ただし、今回の例ではサーバやデータベースまでは用意しないので、どこからともなくデータを取得したことにしてくれるServiceを作ってみます。
+このダミーデータを<code>app/mock-heroes.ts</code>に以下のように定義します。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> HEROES: Hero[] = [
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">11</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mr. Nice"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">12</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Narco"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">13</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Bombasto"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">14</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Celeritas"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">15</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Magneta"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">16</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"RubberMan"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">17</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Dynama"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">18</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Dr IQ"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">19</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Magma"</span>},
+    {<span class="hljs-string">"id"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Tornado"</span>}
+];
+</code></pre>
+<p>次にServiceの定義です。
+<code>app/hero.service.ts</code>を作り、以下のような内容にします。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> {HEROES} <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;
+<span class="hljs-keyword">import</span> {Injectable} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+
+@Injectable()
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeroService</span> </span>{
+  getHeroes() {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(HEROES);
+  }
+  <span class="hljs-comment">// See the "Take it slow" appendix</span>
+  getHeroesSlowly() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>&lt;Hero[]&gt;(resolve =&gt;
+      setTimeout(()=&gt;resolve(HEROES), <span class="hljs-number">2000</span>) <span class="hljs-comment">// 2 seconds</span>
+    );
+  }
+}
+</code></pre>
+<p><code>app/app.component.ts</code>の中身を以下のように修正して<code>HeroService</code>を利用します。</p>
+<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component, OnInit} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> {HeroDetailComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero-detail.component'</span>;
+<span class="hljs-keyword">import</span> {HeroService} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero.service'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-app'</span>,
+  template:<span class="hljs-string">`
+    &lt;h1&gt;{{title}}&lt;/h1&gt;
+    &lt;h2&gt;My Heroes&lt;/h2&gt;
+    &lt;ul class="heroes"&gt;
+      &lt;li *ngFor="#hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)"&gt;
+        &lt;span class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;my-hero-detail [hero]="selectedHero"&gt;&lt;/my-hero-detail&gt;
+  `</span>,
+  styles:[<span class="hljs-string">`
+    .selected {
+      background-color: #CFD8DC !important;
+      color: white;
+    }
+    .heroes {
+      margin: 0 0 2em 0;
+      list-style-type: none;
+      padding: 0;
+      width: 10em;
+    }
+    .heroes li {
+      cursor: pointer;
+      position: relative;
+      left: 0;
+      background-color: #EEE;
+      margin: .5em;
+      padding: .3em 0;
+      height: 1.6em;
+      border-radius: 4px;
+    }
+    .heroes li.selected:hover {
+      background-color: #BBD8DC !important;
+      color: white;
+    }
+    .heroes li:hover {
+      color: #607D8B;
+      background-color: #DDD;
+      left: .1em;
+    }
+    .heroes .text {
+      position: relative;
+      top: -3px;
+    }
+    .heroes .badge {
+      display: inline-block;
+      font-size: small;
+      color: white;
+      padding: 0.8em 0.7em 0 0.7em;
+      background-color: #607D8B;
+      line-height: 1em;
+      position: relative;
+      left: -1px;
+      top: -4px;
+      height: 1.8em;
+      margin-right: .8em;
+      border-radius: 4px 0 0 4px;
+    }
+  `</span>],
+  directives: [HeroDetailComponent],
+  providers: [HeroService]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> <span class="hljs-title">implements</span> <span class="hljs-title">OnInit</span> </span>{
+  title = <span class="hljs-string">'Tour of Heroes'</span>;
+  heroes: Hero[];
+  selectedHero: Hero;
+  
+  <span class="hljs-keyword">constructor</span>(private _heroService: HeroService) { }
+  
+  getHeroes() {
+    <span class="hljs-keyword">this</span>._heroService.getHeroes().then(heroes =&gt; <span class="hljs-keyword">this</span>.heroes = heroes);
+  }
+  
+  ngOnInit() {
+    <span class="hljs-keyword">this</span>.getHeroes();
+  }
+  
+  onSelect(hero: Hero) { <span class="hljs-keyword">this</span>.selectedHero = hero; }
+}
+</code></pre>
+<h1 id="routing" id="routing">Routing</h1>
+</div></body></html>
