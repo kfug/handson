@@ -119,7 +119,7 @@ _ヒント： `build.js` は `{{path}}` to `{{file}}` の変数を用意して�
 日本語版は `English` にしましょう。そして `template/nav.html` は
 
 ```html
-<a href="">{{otherLangName}}</a>`
+<a href="...">{{otherLangName}}</a>
 ```
 
 は使うようにしましょう。
@@ -165,7 +165,7 @@ processFiles(SOURCE, path.join(TARGET, 'ja'), {
 ## 残りの Nav を翻訳
 次のものはすぐできると思います。コンテンツと同じようにリンクの HTML タグを書き換えてください。
 
-```
+```html
 <a href="...">{{link.head}}</a>
 ```
  
