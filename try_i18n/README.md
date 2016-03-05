@@ -25,7 +25,7 @@
 ## はじめに
 ハンズオンのために [Node.js](https://nodejs.org/) が必要となります。
 
-そしてサンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/i18n.zip)するか、 git 経由で clone してください。
+そしてサンプルファイルを[ダウンロード](https://github.com/kfug/handson/archive/try_i18n.zip)するか、 git 経由で clone してください。
 
 ````
 $ git clone https://github.com/kfug/handson
