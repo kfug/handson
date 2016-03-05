@@ -1,8 +1,10 @@
-<!DOCTYPE html><html><head><meta charset="utf8"><title></title><link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css"><script src="../highlight.pack.js"></script></head><body><div class="markdown-body"><p><div class="table-of-contents"><ul><li><a href="#angular2-ハンズオン">Angular2 ハンズオン</a><ul><li><a href="#はじめに">はじめに</a></li><li><a href="#まずは肩慣らし">まずは肩慣らし</a></li></ul></li><li><a href="#webアプリを作ろう">Webアプリを作ろう</a><ul><li><a href="#データバインディング">データバインディング</a></li><li><a href="#テンプレートの繰り返しと条件分岐、そしてcomponentのスタイル">テンプレートの繰り返しと条件分岐、そしてComponentのスタイル</a></li><li><a href="#子コンポーネント">子コンポーネント</a></li><li><a href="#service">Service</a></li></ul></li><li><a href="#routing">Routing</a></li></ul></div></p>
+<!DOCTYPE html><html><head><meta charset="utf8"><title></title><link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css"><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/github.min.css"><script src="../highlight.pack.js"></script></head><body><div class="markdown-body"><p><div class="table-of-contents"><ul><li><a href="#angular2-ハンズオン">Angular2 ハンズオン</a><ul><li><a href="#はじめに">はじめに</a></li><li><a href="#まずは肩慣らし">まずは肩慣らし</a></li><li><a href="#webアプリを作ろう">Webアプリを作ろう</a></li><li><a href="#おわりに">おわりに</a></li></ul></li></ul></div></p>
 <h1 id="angular2-ハンズオン" id="angular2">Angular2 ハンズオン</h1>
 <p>これはAngular 2ハンズオン@FRONTEND CONFERENCE 2016用の資料です。</p>
+<p>http://kfug.jp/handson/try_angular2/</p>
 <h2 id="はじめに" id="">はじめに</h2>
-<p>このハンズオンではAngular 2公式の<a href="https://angular.io/docs/ts/latest/quickstart.html">チュートリアル</a>を行います。
+<p>これはAngular 2ハンズオン@FRONTEND CONFERENCE 2016用の資料です。
+このハンズオンではAngular 2公式の<a href="https://angular.io/docs/ts/latest/quickstart.html">チュートリアル</a>をベースに行います。
 開発環境として、ブラウザ上でTypeScript開発のできる<a href="https://plnkr.co/">Plunker</a>を使用します。
 Angularのバージョンは、執筆時点での最新版の2.0.0-beta.8を使用しています。</p>
 <h2 id="まずは肩慣らし" id="">まずは肩慣らし</h2>
@@ -12,13 +14,13 @@ Angularのバージョンは、執筆時点での最新版の2.0.0-beta.8を使�
 「New File」から新しく <code>app/app.component.ts</code> というファイルを追加してください。
 .tsはTypeScriptファイルの拡張子です。
 追加したファイルに以下のようなコードを実装してください。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'angular2/core'</span>;
 
 @Component({
     selector: <span class="hljs-string">'my-app'</span>,
     template: <span class="hljs-string">'&lt;h1&gt;My First Angular 2 App&lt;/h1&gt;'</span>
 })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{ }
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent { }
 </code></pre>
 <p>さて、<code>import</code>、<code>@Component(…)</code>、<code>export</code>、<code>class AppComponent {}</code>といきなり見慣れないコードが並んでいるかもしれません。
 これらは、JavaScriptの新しい構文を先取りしたものになります。
@@ -29,8 +31,8 @@ Angularのバージョンは、執筆時点での最新版の2.0.0-beta.8を使�
 <p>このComponentを画面に表示してみましょう。
 新に<code>app/main.ts</code>というファイルを追加します。
 中身は以下の通りです。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {bootstrap}    <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/platform/browser'</span>
-<span class="hljs-keyword">import</span> {AppComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {bootstrap}    from <span class="hljs-string">'angular2/platform/browser'</span>
+<span class="hljs-keyword">import</span> {AppComponent} from <span class="hljs-string">'./app.component'</span>
 
 bootstrap(AppComponent);
 </code></pre>
@@ -51,20 +53,20 @@ bootstrap(AppComponent);
 Angular 2の基本は、このようにComponentを作ることとComponentを使うことだけです。</p>
 <p>ここまで進めた結果を以下のURLにまとめています。</p>
 <p>https://plnkr.co/edit/JRoujsC9Iyev6KdQPDWK</p>
-<h1 id="webアプリを作ろう" id="web">Webアプリを作ろう</h1>
+<h2 id="webアプリを作ろう" id="web">Webアプリを作ろう</h2>
 <p>ここまでは簡単すぎましたか？
 Angularの魅力をもっと知るために、ユーザーの入力があって、複数ページから構成されるようなWebアプリの実装に進みましょう。</p>
 <p>まずは完成図を見てください。</p>
 <p>https://angular.io/resources/live-examples/tutorial/ts/plnkr.html</p>
 <p>これが、Angular 2を使って、全部で200行ぐらいのTypeScriptで実装されています。
 順に実装していきましょう。</p>
-<h2 id="データバインディング" id="">データバインディング</h2>
+<h3 id="データバインディング" id="">データバインディング</h3>
 <p><code>app.component.ts</code>の内容を以下のように変更してください。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'angular2/core'</span>;
 
-interface Hero {
-  id: number;
-  name: string;
+<span class="hljs-keyword">interface</span> Hero {
+  id: <span class="hljs-built_in">number</span>;
+  name: <span class="hljs-built_in">string</span>;
 }
 
 @Component({
@@ -79,9 +81,9 @@ interface Hero {
     &lt;/div&gt;
   `</span>
 })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
-  public title = <span class="hljs-string">'Tour of Heroes'</span>;
-  public hero: Hero = {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
+  <span class="hljs-keyword">public</span> title = <span class="hljs-string">'Tour of Heroes'</span>;
+  <span class="hljs-keyword">public</span> hero: Hero = {
     id: <span class="hljs-number">1</span>,
     name: <span class="hljs-string">'Windstorm'</span>
   };
@@ -105,88 +107,109 @@ Plunkerではなく、TypeScriptをオフラインコンパイルする場合は
 フレームワークを使わずに双方向バインディングを実装するとなると結構大変です。</p>
 <p>ここまでのソースを以下のURLにまとめています。</p>
 <p>https://plnkr.co/edit/l7xYXFI40DKnbJWC2J5K</p>
-<h2 id="テンプレートの繰り返しと条件分岐、そしてcomponentのスタイル" id="component">テンプレートの繰り返しと条件分岐、そしてComponentのスタイル</h2>
-<p>次は、Heroを一つじゃなくてリスト表示し、なおかつクリックして選択したHeroの詳細情報を表示するようにしましょう。
-<code>app/app.component.ts</code>を以下のように書き換えます。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<h3 id="テンプレートファイルの分離" id="">テンプレートファイルの分離</h3>
+<p>これまではテンプレートを、TypeScriptファイルの中に文字列で埋め込んでいました。
+これではTypeScriptファイルが長くなりますし、エディターの支援も効かなくなります。</p>
+<p>テンプレートを別ファイルに分離してみましょう。
+別ファイルにすることでチーム開発もやりやすくなります。</p>
+<p>まず、テンプレート部分を<code>app/app.component.html</code>に移します。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{hero.name}} details!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>id: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>name: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"hero.name"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p><code>app/app.component.ts</code>は以下のようになります。</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'angular2/core'</span>;
 
-interface Hero {
-  id: number;
-  name: string;
+<span class="hljs-keyword">interface</span> Hero {
+  id: <span class="hljs-built_in">number</span>;
+  name: <span class="hljs-built_in">string</span>;
 }
 
 @Component({
   selector: <span class="hljs-string">'my-app'</span>,
-  template:<span class="hljs-string">`
-    &lt;h1&gt;{{title}}&lt;/h1&gt;
-    &lt;h2&gt;My Heroes&lt;/h2&gt;
-    &lt;ul class="heroes"&gt;
-      &lt;li *ngFor="#hero of heroes"
-        [class.selected]="hero === selectedHero"
-        (click)="onSelect(hero)"&gt;
-        &lt;span class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}
-      &lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;div *ngIf="selectedHero"&gt;
-      &lt;h2&gt;{{selectedHero.name}} details!&lt;/h2&gt;
-      &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{selectedHero.id}}&lt;/div&gt;
-      &lt;div&gt;
-        &lt;label&gt;name: &lt;/label&gt;
-        &lt;input [(ngModel)]="selectedHero.name" placeholder="name"/&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  `</span>,
-  styles:[<span class="hljs-string">`
-    .selected {
-      background-color: #CFD8DC !important;
-      color: white;
-    }
-    .heroes {
-      margin: 0 0 2em 0;
-      list-style-type: none;
-      padding: 0;
-      width: 10em;
-    }
-    .heroes li {
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      background-color: #EEE;
-      margin: .5em;
-      padding: .3em 0;
-      height: 1.6em;
-      border-radius: 4px;
-    }
-    .heroes li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
-    }
-    .heroes li:hover {
-      color: #607D8B;
-      background-color: #DDD;
-      left: .1em;
-    }
-    .heroes .text {
-      position: relative;
-      top: -3px;
-    }
-    .heroes .badge {
-      display: inline-block;
-      font-size: small;
-      color: white;
-      padding: 0.8em 0.7em 0 0.7em;
-      background-color: #607D8B;
-      line-height: 1em;
-      position: relative;
-      left: -1px;
-      top: -4px;
-      height: 1.8em;
-      margin-right: .8em;
-      border-radius: 4px 0 0 4px;
-    }
-  `</span>]
+  templateUrl: <span class="hljs-string">'app/app.component.html'</span>
 })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
+  <span class="hljs-keyword">public</span> title = <span class="hljs-string">'Tour of Heroes'</span>;
+  <span class="hljs-keyword">public</span> hero: Hero = {
+    id: <span class="hljs-number">1</span>,
+    name: <span class="hljs-string">'Windstorm'</span>
+  };
+}
+</code></pre>
+<p><code>template</code>の代わりに<code>templateUrl</code>でテンプレートファイルのURLを指定します。
+ちょっとスッキリしましたね。</p>
+<p>ここまでのソースは以下の通りです。</p>
+<p>https://plnkr.co/edit/FiZoOe4VmcSdI9YZaCJc?</p>
+<h3 id="テンプレートの繰り返しと条件分岐、そしてcomponentのスタイル" id="component">テンプレートの繰り返しと条件分岐、そしてComponentのスタイル</h3>
+<p>次は、Heroを一つじゃなくてリスト表示し、なおかつクリックして選択したHeroの詳細情報を表示するようにしましょう。</p>
+<p>まず、このComponentの中でだけ使うスタイルを<code>app/app.component.css</code>に用意します。</p>
+<pre><code class="language-css"><span class="hljs-selector-class">.selected</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#CFD8DC</span> <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">color</span>: white;
+}
+<span class="hljs-selector-class">.heroes</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">2em</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">list-style-type</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">10em</span>;
+}
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span> {
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#EEE</span>;
+  <span class="hljs-attribute">margin</span>: .<span class="hljs-number">5em</span>;
+  <span class="hljs-attribute">padding</span>: .<span class="hljs-number">3em</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">1.6em</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+}
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.selected</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#BBD8DC</span> <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">color</span>: white;
+}
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#607D8B</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#DDD</span>;
+  <span class="hljs-attribute">left</span>: .<span class="hljs-number">1em</span>;
+}
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-class">.text</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">3px</span>;
+}
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-class">.badge</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">font-size</span>: small;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.8em</span> <span class="hljs-number">0.7em</span> <span class="hljs-number">0</span> <span class="hljs-number">0.7em</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#607D8B</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1em</span>;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">left</span>: -<span class="hljs-number">1px</span>;
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">1.8em</span>;
+  <span class="hljs-attribute">margin-right</span>: .<span class="hljs-number">8em</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">4px</span>;
+}
+</code></pre>
+<p>次に<code>app/app.component.ts</code>を以下のように書き換えます。</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'angular2/core'</span>;
+
+<span class="hljs-keyword">interface</span> Hero {
+  id: <span class="hljs-built_in">number</span>;
+  name: <span class="hljs-built_in">string</span>;
+}
+
+@Component({
+  selector: <span class="hljs-string">'my-app'</span>,
+  templateUrl: <span class="hljs-string">'app/app.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'app/app.component.css'</span>]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
   title = <span class="hljs-string">'Tour of Heroes'</span>;
   heroes = HEROES;
   selectedHero: Hero;
@@ -206,110 +229,93 @@ interface Hero {
   { <span class="hljs-string">"id"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Tornado"</span> }
 ];
 </code></pre>
-<h2 id="子コンポーネント" id="">子コンポーネント</h2>
-<p>Heroの詳細を表示する機能をひとまとまりとしてComponent化してみます。
+<p><code>styleUrls</code>というパラメータを追加して、スタイルファイルのURLを指定します。
+もちろん<code>styles</code>というパラメータで直接スタイルを書くこともできます。</p>
+<p><code>AppComponent</code>の中身も、<code>heroes</code>というリストを定義して、その中から一つのヒーローを選択するというロジックを追加しています。</p>
+<p>最後に<code>app/app.component.html</code>を次のように変更します。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>My Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heroes"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"#hero of heroes"</span>
+    [<span class="hljs-attr">class.selected</span>]=<span class="hljs-string">"hero === selectedHero"</span>
+    (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSelect(hero)"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> {{hero.name}}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"selectedHero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{selectedHero.name}} details!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>id: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>{{selectedHero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>name: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"selectedHero.name"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"name"</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p>ここでも新しい要素がいくつか出ています。</p>
+<p>まず、<code>*ngFor=&quot;#hero of heroes&quot;</code>という部分は<code>heroes</code>リストの1件1件について、以下の要素を生成します。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> [<span class="hljs-attr">class.selected</span>]=<span class="hljs-string">"hero === selectedHero"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSelect(hero)"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> {{hero.name}}
+<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+</code></pre>
+<p>今、<code>heroes</code>が10個の要素を持っているので、10個の<code>li</code>要素が生成されます。</p>
+<p>この中に<code>[class.selected]=&quot;hero === selectedHero&quot;</code>と<code>(click)=&quot;onSelect(hero)&quot;</code>という記述があります。
+一つ目は、<code>hero === selectedHero</code>が<code>true</code>のとき<code>selected</code>というクラスが要素に追加されるようにしています。
+二つ目は、<code>click</code>のイベント時に<code>onSelect(hero)</code>という処理が実行されるようにしています。</p>
+<p>次に、<code>selectedHero</code>の詳細を表示する部分に<code>*ngIf=&quot;selectedHero&quot;</code>という記述があります。
+最初は<code>selectedHero</code>が<code>undefined</code>なので、Heroが選択されるまえは表示しないようにしています。
+つまり、<code>selectedHero</code>が<code>true</code>として評価されるときだけ中身の要素が生成されます。
+この詳細部分でHeroの名前を変更するとリストにも反映されることが確認できると思います。</p>
+<p>このように、テンプレートにデータを結びつけることで画面の表現力を持たせています。</p>
+<p>ここまでのコードは以下の通りです。</p>
+<p>https://plnkr.co/edit/PycoEpr0IyKPAWhWgRR9</p>
+<h3 id="子コンポーネント" id="">子コンポーネント</h3>
+<p>さて、Componentの機能が増えてきて徐々に見通しがわるくなってきました。
+一つ一つのComponentをシンプルに保つことは開発のメンテナンス性を高める上で重要です。
+そこで、Heroの詳細を表示する機能をひとまとまりとしてComponentの分割を行ってみます。
 このComponentを子Componentとして、親Componentである<code>AppComponent</code>から利用します。</p>
 <p>まず、<code>Hero</code>インタフェースは子コンポーネントと親コンポーネントの両方で使用したいので、新たなファイルに移しましょう。
 <code>app/hero.ts</code>を作り、以下のような中身にします。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">export</span> interface Hero {
-  id: number;
-  name: string;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Hero {
+  id: <span class="hljs-built_in">number</span>;
+  name: <span class="hljs-built_in">string</span>;
 }
 </code></pre>
 <p>次に子Componentの実装です。
 新たに<code>app/hero-detail.component.ts</code>を作り、内容を以下の通りにします。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
-<span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {Hero} from <span class="hljs-string">'./hero'</span>;
 
 @Component({
   selector: <span class="hljs-string">'my-hero-detail'</span>,
-  template: <span class="hljs-string">`
-    &lt;div *ngIf="hero"&gt;
-      &lt;h2&gt;{{hero.name}} details!&lt;/h2&gt;
-      &lt;div&gt;&lt;label&gt;id: &lt;/label&gt;{{hero.id}}&lt;/div&gt;
-      &lt;div&gt;
-        &lt;label&gt;name: &lt;/label&gt;
-        &lt;input [(ngModel)]="hero.name" placeholder="name"/&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  `</span>,
+  templateUrl: <span class="hljs-string">'app/hero-detail.component.html'</span>,
   inputs: [<span class="hljs-string">'hero'</span>]
 })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeroDetailComponent</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> HeroDetailComponent {
   hero: Hero;
 }
 </code></pre>
+<p>テンプレート部分は<code>app/hero-detail.component.html</code>として以下のようになります。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"hero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{hero.name}} details!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>id: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>name: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"hero.name"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"name"</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
 <p>また、<code>app/app.component.ts</code>を以下のように修正します。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
-<span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
-<span class="hljs-keyword">import</span> {HeroDetailComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero-detail.component'</span>;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component} from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {Hero} from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> {HeroDetailComponent} from <span class="hljs-string">'./hero-detail.component'</span>;
 
 @Component({
   selector: <span class="hljs-string">'my-app'</span>,
-  template:<span class="hljs-string">`
-    &lt;h1&gt;{{title}}&lt;/h1&gt;
-    &lt;h2&gt;My Heroes&lt;/h2&gt;
-    &lt;ul class="heroes"&gt;
-      &lt;li *ngFor="#hero of heroes"
-        [class.selected]="hero === selectedHero"
-        (click)="onSelect(hero)"&gt;
-        &lt;span class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}
-      &lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;my-hero-detail [hero]="selectedHero"&gt;&lt;/my-hero-detail&gt;
-  `</span>,
-  styles:[<span class="hljs-string">`
-    .selected {
-      background-color: #CFD8DC !important;
-      color: white;
-    }
-    .heroes {
-      margin: 0 0 2em 0;
-      list-style-type: none;
-      padding: 0;
-      width: 10em;
-    }
-    .heroes li {
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      background-color: #EEE;
-      margin: .5em;
-      padding: .3em 0;
-      height: 1.6em;
-      border-radius: 4px;
-    }
-    .heroes li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
-    }
-    .heroes li:hover {
-      color: #607D8B;
-      background-color: #DDD;
-      left: .1em;
-    }
-    .heroes .text {
-      position: relative;
-      top: -3px;
-    }
-    .heroes .badge {
-      display: inline-block;
-      font-size: small;
-      color: white;
-      padding: 0.8em 0.7em 0 0.7em;
-      background-color: #607D8B;
-      line-height: 1em;
-      position: relative;
-      left: -1px;
-      top: -4px;
-      height: 1.8em;
-      margin-right: .8em;
-      border-radius: 4px 0 0 4px;
-    }
-  `</span>],
+  templateUrl: <span class="hljs-string">'app/app.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'app/app.component.css'</span>],
   directives: [HeroDetailComponent]
 })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
   title = <span class="hljs-string">'Tour of Heroes'</span>;
   heroes = HEROES;
   selectedHero: Hero;
@@ -329,7 +335,24 @@ interface Hero {
   { <span class="hljs-string">"id"</span>: <span class="hljs-number">20</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Tornado"</span> }
 ];
 </code></pre>
-<h2 id="service" id="service">Service</h2>
+<p><code>HeroDetailComponent</code>を<code>import</code>し、<code>directives</code>パラメータに与えることでテンプレートで使用可能にしています。</p>
+<p><code>app/app.component.ts</code>は以下のようになります。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>My Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heroes"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"#hero of heroes"</span>
+    [<span class="hljs-attr">class.selected</span>]=<span class="hljs-string">"hero === selectedHero"</span>
+    (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSelect(hero)"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> {{hero.name}}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">my-hero-detail</span> [<span class="hljs-attr">hero</span>]=<span class="hljs-string">"selectedHero"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">my-hero-detail</span>&gt;</span>
+</code></pre>
+<p><code>HeroDetailComponent</code>の<code>hero</code>に<code>selectedHero</code>を与えています。
+機能はそのままで、ちょっとスッキリしました。</p>
+<p>ここまでのコードは以下の通りです。</p>
+<p>https://plnkr.co/edit/T8aI1QjR6Ent5OLFsC68</p>
+<h3 id="service" id="service">Service</h3>
 <p>Componentは画面の表示に集中するべきです。
 Componentから画面表示と関係の薄いロジックを切り離すことで、変更に強い開発ができるようになります。
 Angular 2では、このようなロジックをServiceとして定義することができます。</p>
@@ -338,7 +361,7 @@ Angular 2では、このようなロジックをServiceとして定義するこ�
 例えば、このようなデータ取得のロジックはServiceに切り出すことができます。</p>
 <p>ただし、今回の例ではサーバやデータベースまでは用意しないので、どこからともなくデータを取得したことにしてくれるServiceを作ってみます。
 このダミーデータを<code>app/mock-heroes.ts</code>に以下のように定義します。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Hero} from <span class="hljs-string">'./hero'</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> HEROES: Hero[] = [
     {<span class="hljs-string">"id"</span>: <span class="hljs-number">11</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mr. Nice"</span>},
@@ -355,96 +378,38 @@ Angular 2では、このようなロジックをServiceとして定義するこ�
 </code></pre>
 <p>次にServiceの定義です。
 <code>app/hero.service.ts</code>を作り、以下のような内容にします。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
-<span class="hljs-keyword">import</span> {HEROES} <span class="hljs-keyword">from</span> <span class="hljs-string">'./mock-heroes'</span>;
-<span class="hljs-keyword">import</span> {Injectable} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Hero} from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> {HEROES} from <span class="hljs-string">'./mock-heroes'</span>;
+<span class="hljs-keyword">import</span> {Injectable} from <span class="hljs-string">'angular2/core'</span>;
 
 @Injectable()
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HeroService</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> HeroService {
   getHeroes() {
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.resolve(HEROES);
+    <span class="hljs-keyword">return</span> Promise.resolve(HEROES);
   }
   <span class="hljs-comment">// See the "Take it slow" appendix</span>
   getHeroesSlowly() {
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>&lt;Hero[]&gt;(resolve =&gt;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise&lt;Hero[]&gt;(resolve =&gt;
       setTimeout(()=&gt;resolve(HEROES), <span class="hljs-number">2000</span>) <span class="hljs-comment">// 2 seconds</span>
     );
   }
 }
 </code></pre>
-<p><code>app/app.component.ts</code>の中身を以下のように修正して<code>HeroService</code>を利用します。</p>
-<pre><code class="language-JavaScript"><span class="hljs-keyword">import</span> {Component, OnInit} <span class="hljs-keyword">from</span> <span class="hljs-string">'angular2/core'</span>;
-<span class="hljs-keyword">import</span> {Hero} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero'</span>;
-<span class="hljs-keyword">import</span> {HeroDetailComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero-detail.component'</span>;
-<span class="hljs-keyword">import</span> {HeroService} <span class="hljs-keyword">from</span> <span class="hljs-string">'./hero.service'</span>;
+<p><code>@Injectable</code>デコレータをつけることで<code>HeroService</code>にServiceとしての役割ををもたせます。</p>
+<p>そして、<code>app/app.component.ts</code>の中身を以下のように修正して<code>HeroService</code>を利用します。</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> {Component, OnInit} from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {Hero} from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> {HeroDetailComponent} from <span class="hljs-string">'./hero-detail.component'</span>;
+<span class="hljs-keyword">import</span> {HeroService} from <span class="hljs-string">'./hero.service'</span>;
 
 @Component({
   selector: <span class="hljs-string">'my-app'</span>,
-  template:<span class="hljs-string">`
-    &lt;h1&gt;{{title}}&lt;/h1&gt;
-    &lt;h2&gt;My Heroes&lt;/h2&gt;
-    &lt;ul class="heroes"&gt;
-      &lt;li *ngFor="#hero of heroes"
-        [class.selected]="hero === selectedHero"
-        (click)="onSelect(hero)"&gt;
-        &lt;span class="badge"&gt;{{hero.id}}&lt;/span&gt; {{hero.name}}
-      &lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;my-hero-detail [hero]="selectedHero"&gt;&lt;/my-hero-detail&gt;
-  `</span>,
-  styles:[<span class="hljs-string">`
-    .selected {
-      background-color: #CFD8DC !important;
-      color: white;
-    }
-    .heroes {
-      margin: 0 0 2em 0;
-      list-style-type: none;
-      padding: 0;
-      width: 10em;
-    }
-    .heroes li {
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      background-color: #EEE;
-      margin: .5em;
-      padding: .3em 0;
-      height: 1.6em;
-      border-radius: 4px;
-    }
-    .heroes li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
-    }
-    .heroes li:hover {
-      color: #607D8B;
-      background-color: #DDD;
-      left: .1em;
-    }
-    .heroes .text {
-      position: relative;
-      top: -3px;
-    }
-    .heroes .badge {
-      display: inline-block;
-      font-size: small;
-      color: white;
-      padding: 0.8em 0.7em 0 0.7em;
-      background-color: #607D8B;
-      line-height: 1em;
-      position: relative;
-      left: -1px;
-      top: -4px;
-      height: 1.8em;
-      margin-right: .8em;
-      border-radius: 4px 0 0 4px;
-    }
-  `</span>],
+  templateUrl: <span class="hljs-string">'app/app.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'app/app.component.css'</span>],
   directives: [HeroDetailComponent],
   providers: [HeroService]
 })
-<span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppComponent</span> <span class="hljs-title">implements</span> <span class="hljs-title">OnInit</span> </span>{
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent <span class="hljs-keyword">implements</span> OnInit {
   title = <span class="hljs-string">'Tour of Heroes'</span>;
   heroes: Hero[];
   selectedHero: Hero;
@@ -462,5 +427,480 @@ Angular 2では、このようなロジックをServiceとして定義するこ�
   onSelect(hero: Hero) { <span class="hljs-keyword">this</span>.selectedHero = hero; }
 }
 </code></pre>
-<h1 id="routing" id="routing">Routing</h1>
+<p><code>providers</code>パラメータに<code>import</code>した<code>HeroService</code>を登録しています。</p>
+<p><code>constructor</code>で<code>AppComponent</code>が生成された時に<code>HeroService</code>のインスタンスを<code>private</code>なプロパティとして保持します。</p>
+<p>また、<code>OnInit</code>というインタフェースを実装していることに気づいたかもしれません。
+これはAngular 2の提供するComponent Lifecycle Hookの一つです。
+ここでは、<code>AppComponent</code>がComponentとして初期化されるタイミングで<code>ngOnInit</code>メソッドが呼び出されます。
+ここで、<code>HeroService</code>を利用してHeroのリストを取得しています。</p>
+<p>これによって、Heroの取得処理をServiceに切り離すことができました。</p>
+<p>ここまでのソースは以下の通りです。</p>
+<p>https://plnkr.co/edit/anjQimKjwGeEVfIOuHbq?p=preview</p>
+<h3 id="routing" id="routing">Routing</h3>
+<p>Componentの組み立て方はわかってきましたか？
+それでは、複数のComponentを使って、複数ページから構成されるWebページを作ってみましょう。</p>
+<p><code>AppComponent</code>をダッシュボード、Heroリスト、Hero詳細の3画面に分割します。
+各画面の実装を順にしていきます。</p>
+<p><code>app/dashboard.component.ts</code></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { Component, OnInit } from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> { Router } from <span class="hljs-string">'angular2/router'</span>;
+
+<span class="hljs-keyword">import</span> { Hero } from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> { HeroService } from <span class="hljs-string">'./hero.service'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-dashboard'</span>,
+  templateUrl: <span class="hljs-string">'app/dashboard.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'app/dashboard.component.css'</span>]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DashboardComponent <span class="hljs-keyword">implements</span> OnInit {
+
+  heroes: Hero[] = [];
+
+  <span class="hljs-keyword">constructor</span>(
+    private _router: Router,
+    private _heroService: HeroService) {
+  }
+
+  ngOnInit() {
+    <span class="hljs-keyword">this</span>._heroService.getHeroes()
+      .then(heroes =&gt; <span class="hljs-keyword">this</span>.heroes = heroes.slice(<span class="hljs-number">1</span>,<span class="hljs-number">5</span>));
+  }
+
+  gotoDetail(hero: Hero) {
+    <span class="hljs-keyword">let</span> link = [<span class="hljs-string">'HeroDetail'</span>, { id: hero.id }];
+    <span class="hljs-keyword">this</span>._router.navigate(link);
+  }
+}
+</code></pre>
+<p><code>app/dashboard.component.html</code></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Top Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"grid grid-pad"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"#hero of heroes"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"gotoDetail(hero)"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"col-1-4"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"module hero"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>{{hero.name}}<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p><code>app/dashboard.component.css</code></p>
+<pre><code class="language-css"><span class="hljs-selector-attr">[class*='col-']</span> {
+  <span class="hljs-attribute">float</span>: left;
+}
+
+*,
+*<span class="hljs-selector-pseudo">:after</span>,
+*<span class="hljs-selector-pseudo">:before</span> {
+  <span class="hljs-attribute">-webkit-box-sizing</span>: border-box;
+  <span class="hljs-attribute">-moz-box-sizing</span>: border-box;
+  <span class="hljs-attribute">box-sizing</span>: border-box;
+}
+
+<span class="hljs-selector-tag">h3</span> {
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-attr">[class*='col-']</span> {
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">20px</span>;
+}
+
+<span class="hljs-selector-attr">[class*='col-']</span><span class="hljs-selector-pseudo">:last-of-type</span> {
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.grid</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.col-1-4</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">25%</span>;
+}
+
+<span class="hljs-selector-class">.module</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#eee</span>;
+  <span class="hljs-attribute">max-height</span>: <span class="hljs-number">120px</span>;
+  <span class="hljs-attribute">min-width</span>: <span class="hljs-number">120px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#607D8B</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">2px</span>;
+}
+
+<span class="hljs-selector-tag">h4</span> {
+  <span class="hljs-attribute">position</span>: relative;
+}
+
+<span class="hljs-selector-class">.module</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#EEE</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#607d8b</span>;
+}
+
+<span class="hljs-selector-class">.grid-pad</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.grid-pad</span> &gt; <span class="hljs-selector-attr">[class*='col-']</span><span class="hljs-selector-pseudo">:last-of-type</span> {
+  <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">20px</span>;
+}
+
+@<span class="hljs-keyword">media</span> (max-width: <span class="hljs-number">600px</span>) {
+  <span class="hljs-selector-class">.module</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">10px</span>;
+    <span class="hljs-attribute">max-height</span>: <span class="hljs-number">75px</span>;
+  }
+}
+
+@<span class="hljs-keyword">media</span> (max-width: <span class="hljs-number">1024px</span>) {
+  <span class="hljs-selector-class">.grid</span> {
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-selector-class">.module</span> {
+    <span class="hljs-attribute">min-width</span>: <span class="hljs-number">60px</span>;
+  }
+}
+</code></pre>
+<p><code>app/heroes.component.ts</code></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { Component, OnInit } from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> { Router } from <span class="hljs-string">'angular2/router'</span>;
+
+<span class="hljs-keyword">import</span> { Hero } from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> { HeroDetailComponent } from <span class="hljs-string">'./hero-detail.component'</span>;
+<span class="hljs-keyword">import</span> { HeroService } from <span class="hljs-string">'./hero.service'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-heroes'</span>,
+  templateUrl: <span class="hljs-string">'app/heroes.component.html'</span>,
+  styleUrls:  [<span class="hljs-string">'app/heroes.component.css'</span>],
+  directives: [HeroDetailComponent]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> HeroesComponent <span class="hljs-keyword">implements</span> OnInit {
+  heroes: Hero[];
+  selectedHero: Hero;
+
+  <span class="hljs-keyword">constructor</span>(
+    private _router: Router,
+    private _heroService: HeroService) { }
+
+  getHeroes() {
+    <span class="hljs-keyword">this</span>._heroService.getHeroes().then(heroes =&gt; <span class="hljs-keyword">this</span>.heroes = heroes);
+  }
+
+  ngOnInit() {
+    <span class="hljs-keyword">this</span>.getHeroes();
+  }
+
+  onSelect(hero: Hero) { <span class="hljs-keyword">this</span>.selectedHero = hero; }
+
+  gotoDetail() {
+    <span class="hljs-keyword">this</span>._router.navigate([<span class="hljs-string">'HeroDetail'</span>, { id: <span class="hljs-keyword">this</span>.selectedHero.id }]);
+  }
+}
+</code></pre>
+<p><code>app/heroes.component.html</code></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>My Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heroes"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"#hero of heroes"</span> [<span class="hljs-attr">class.selected</span>]=<span class="hljs-string">"hero === selectedHero"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onSelect(hero)"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"badge"</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> {{hero.name}}
+  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"selectedHero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>
+    {{selectedHero.name | uppercase}} is my hero
+  <span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"gotoDetail()"</span>&gt;</span>View Details<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p><code>app/heroes.component.css</code></p>
+<pre><code class="language-css"><span class="hljs-selector-class">.selected</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#CFD8DC</span> <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">color</span>: white;
+}
+
+<span class="hljs-selector-class">.heroes</span> {
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">2em</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">list-style-type</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">10em</span>;
+}
+
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span> {
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#EEE</span>;
+  <span class="hljs-attribute">margin</span>: .<span class="hljs-number">5em</span>;
+  <span class="hljs-attribute">padding</span>: .<span class="hljs-number">3em</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">1.6em</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+}
+
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#607D8B</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#DDD</span>;
+  <span class="hljs-attribute">left</span>: .<span class="hljs-number">1em</span>;
+}
+
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-tag">li</span><span class="hljs-selector-class">.selected</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#BBD8DC</span> <span class="hljs-meta">!important</span>;
+  <span class="hljs-attribute">color</span>: white;
+}
+
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-class">.text</span> {
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">3px</span>;
+}
+
+<span class="hljs-selector-class">.heroes</span> <span class="hljs-selector-class">.badge</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">font-size</span>: small;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0.8em</span> <span class="hljs-number">0.7em</span> <span class="hljs-number">0</span> <span class="hljs-number">0.7em</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#607D8B</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1em</span>;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">left</span>: -<span class="hljs-number">1px</span>;
+  <span class="hljs-attribute">top</span>: -<span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">1.8em</span>;
+  <span class="hljs-attribute">margin-right</span>: .<span class="hljs-number">8em</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">4px</span>;
+}
+
+<span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">font-family</span>: Arial;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#eee</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">cursor</span>: hand;
+}
+
+<span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#cfd8dc</span>;
+}
+</code></pre>
+<p><code>app/hero-detail.component.ts</code></p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { Component, OnInit } from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> {RouteParams} from <span class="hljs-string">'angular2/router'</span>;
+
+<span class="hljs-keyword">import</span> { Hero } from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> { HeroService } from <span class="hljs-string">'./hero.service'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-hero-detail'</span>,
+  templateUrl: <span class="hljs-string">'app/hero-detail.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'app/hero-detail.component.css'</span>],
+  inputs: [<span class="hljs-string">'hero'</span>]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> HeroDetailComponent <span class="hljs-keyword">implements</span> OnInit {
+  hero: Hero;
+
+  <span class="hljs-keyword">constructor</span>(
+    private _heroService: HeroService,
+    private _routeParams: RouteParams) {
+  }
+
+  ngOnInit() {
+    <span class="hljs-keyword">let</span> id = +<span class="hljs-keyword">this</span>._routeParams.get(<span class="hljs-string">'id'</span>);
+    <span class="hljs-keyword">this</span>._heroService.getHero(id)
+      .then(hero =&gt; <span class="hljs-keyword">this</span>.hero = hero);
+  }
+
+  goBack() {
+    <span class="hljs-built_in">window</span>.history.back();
+  }
+}
+</code></pre>
+<p><code>app/hero-detail.component.html</code></p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"hero"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>{{hero.name}} details!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>id: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>{{hero.id}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>name: <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"hero.name"</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"name"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"goBack()"</span>&gt;</span>Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<p><code>app/hero-detail.component.css</code></p>
+<pre><code class="language-css"><span class="hljs-selector-tag">label</span> {
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">3em</span>;
+  <span class="hljs-attribute">margin</span>: .<span class="hljs-number">5em</span> <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#607D8B</span>;
+  <span class="hljs-attribute">font-weight</span>: bold;
+}
+
+<span class="hljs-selector-tag">input</span> {
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">2em</span>;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1em</span>;
+  <span class="hljs-attribute">padding-left</span>: .<span class="hljs-number">4em</span>;
+}
+
+<span class="hljs-selector-tag">button</span> {
+  <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">font-family</span>: Arial;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#eee</span>;
+  <span class="hljs-attribute">border</span>: none;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">5px</span> <span class="hljs-number">10px</span>;
+  <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+  <span class="hljs-attribute">cursor</span>: pointer;
+  <span class="hljs-attribute">cursor</span>: hand;
+}
+
+<span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:hover</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#cfd8dc</span>;
+}
+
+<span class="hljs-selector-tag">button</span><span class="hljs-selector-pseudo">:disabled</span> {
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#eee</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-number">#ccc</span>;
+  <span class="hljs-attribute">cursor</span>: auto;
+}
+</code></pre>
+<p><code>app/hero.service.ts</code>にも少し変更を加えます。</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { Hero } from <span class="hljs-string">'./hero'</span>;
+<span class="hljs-keyword">import</span> { HEROES } from <span class="hljs-string">'./mock-heroes'</span>;
+<span class="hljs-keyword">import</span> { Injectable } from <span class="hljs-string">'angular2/core'</span>;
+
+@Injectable()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> HeroService {
+  getHeroes() {
+    <span class="hljs-keyword">return</span> Promise.resolve(HEROES);
+  }
+
+  <span class="hljs-comment">// See the "Take it slow" appendix</span>
+  getHeroesSlowly() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise&lt;Hero[]&gt;(resolve =&gt;
+      setTimeout(()=&gt;resolve(HEROES), <span class="hljs-number">2000</span>) <span class="hljs-comment">// 2 seconds</span>
+    );
+  }
+
+    getHero(id: <span class="hljs-built_in">number</span>) {
+    <span class="hljs-keyword">return</span> Promise.resolve(HEROES).then(
+      heroes =&gt; heroes.filter(hero =&gt; hero.id === id)[<span class="hljs-number">0</span>]
+    );
+  }
+}
+</code></pre>
+<p>Routingのために<code>index.html</code>の<code>head</code>に追記を行います。</p>
+<pre><code class="language-html">  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>angular2 playground<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"style.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">'&lt;base href="'</span> + <span class="hljs-built_in">document</span>.location + <span class="hljs-string">'" /&gt;'</span>);</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/2.0.0-beta.8/angular2-polyfills.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/tools/system.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/tools/typescript.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"config.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/2.0.0-beta.8/Rx.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/2.0.0-beta.8/angular2.dev.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/2.0.0-beta.8/router.dev.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.angularjs.org/2.0.0-beta.8/http.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+      System.import(<span class="hljs-string">'app'</span>)
+        .catch(<span class="hljs-built_in">console</span>.error.bind(<span class="hljs-built_in">console</span>));
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</code></pre>
+<p><code>&lt;script&gt;document.write('&lt;base href=&quot;' + document.location + '&quot; /&gt;');&lt;/script&gt;</code>と<code>&lt;script src=&quot;https://code.angularjs.org/2.0.0-beta.8/router.dev.js&quot;&gt;&lt;/script&gt;</code>を加えています。</p>
+<p>そして、<code>app/app.component.ts</code>でRoutingの設定をします。</p>
+<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { Component } from <span class="hljs-string">'angular2/core'</span>;
+<span class="hljs-keyword">import</span> { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from <span class="hljs-string">'angular2/router'</span>;
+
+<span class="hljs-keyword">import</span> { HeroService } from <span class="hljs-string">'./hero.service'</span>;
+<span class="hljs-keyword">import</span> { DashboardComponent } from <span class="hljs-string">'./dashboard.component'</span>;
+<span class="hljs-keyword">import</span> { HeroesComponent } from <span class="hljs-string">'./heroes.component'</span>;
+<span class="hljs-keyword">import</span> { HeroDetailComponent } from <span class="hljs-string">'./hero-detail.component'</span>;
+
+@Component({
+  selector: <span class="hljs-string">'my-app'</span>,
+  templateUrl: <span class="hljs-string">'app/app.component.html'</span>,
+  styleUrls: [<span class="hljs-string">'app/app.component.css'</span>],
+  directives: [ROUTER_DIRECTIVES],
+  providers: [
+    ROUTER_PROVIDERS,
+    HeroService
+  ]
+})
+@RouteConfig([
+  {
+    path: <span class="hljs-string">'/dashboard'</span>,
+    name: <span class="hljs-string">'Dashboard'</span>,
+    component: DashboardComponent,
+    useAsDefault: <span class="hljs-literal">true</span>
+  },
+  {
+    path: <span class="hljs-string">'/detail/:id'</span>,
+    name: <span class="hljs-string">'HeroDetail'</span>,
+    component: HeroDetailComponent
+  },
+  {
+    path: <span class="hljs-string">'/heroes'</span>,
+    name: <span class="hljs-string">'Heroes'</span>,
+    component: HeroesComponent
+  }
+])
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
+  title = <span class="hljs-string">'Tour of Heroes'</span>;
+}
+</code></pre>
+<p><code>@RouteConfig</code>デコレーターでRoutingの設定を行っています。
+どの<code>path</code>に対してどのComponentを割り当てるかを決めています。</p>
+<p>次に、<code>app/app.component.html</code>です。</p>
+<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>{{title}}<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['Dashboard']"</span>&gt;</span>Dashboard<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> [<span class="hljs-attr">routerLink</span>]=<span class="hljs-string">"['Heroes']"</span>&gt;</span>Heroes<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">router-outlet</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">router-outlet</span>&gt;</span>
+</code></pre>
+<p><code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>の部分に現在の<code>path</code>に対するComponentの中身が生成されます。</p>
+<p><code>app/app.component.css</code>も子Componentに共通する部分だけにします。</p>
+<pre><code>h1 {
+  font-size: 1.2em;
+  color: #999;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+nav a:visited,
+a:link {
+  color: #607D8B;
+}
+
+nav a:hover {
+  color: #039be5;
+  background-color: #CFD8DC;
+}
+
+nav a.router-link-active {
+  color: #039be5;
+}
+</code></pre>
+<p>お疲れ様でした。
+ここで実行してみると、リンクをクリックするとページが切り替わっていくのが確認できると思います。</p>
+<p>最後のコードはこちらです。</p>
+<p>https://plnkr.co/edit/n6WVHorvkkogfpIdy8K6</p>
+<h2 id="おわりに" id="">おわりに</h2>
+<p>駆け足でしたが、現時点で公開されているAngular 2のチュートリアルを通しでやってみました。
+Componentの扱いといった基本的なことや、Serviceの分離とRoutingなどの大規模開発に必要な要素は一通り押さえられたと思います。</p>
+<p>もっと詳しく知りたい人は<a href="https://angular.io">Angular 2のサイト</a>も読んでみてください。</p>
 </div></body></html>
