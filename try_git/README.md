@@ -11,7 +11,7 @@
 - Mac  
 [https://downloads.atlassian.com/software/sourcetree/SourceTree_2.1.dmg](https://downloads.atlassian.com/software/sourcetree/SourceTree_2.1.dmg)
 - Windows  
-[https://downloads.atlassian.com/software/sourcetree/windows/](SourceTreeSetup_1.6.25.exe)
+[https://downloads.atlassian.com/software/sourcetree/windows/https://downloads.atlassian.com/software/sourcetree/windows/](https://downloads.atlassian.com/software/sourcetree/windows/SourceTreeSetup_1.6.25.exe)
 
 インストール途中、BitBucket や ssh の設定についてのダイアログが表示された場合は、スキップを選んでいただいて大丈夫です。
 
