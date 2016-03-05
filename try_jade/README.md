@@ -9,6 +9,15 @@
 Jade - Template Engine  
 <http://jade-lang.com/>
 
+----
+
+サンプルコードは以下の URL の README.md になります。
+
+ URL: https://github.com/kfug/handson/tree/master/try_jade
+
+----
+
+
 ## HTML がこんな風に書けます！
 
 Jade でマークアップ！
